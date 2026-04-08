@@ -1,0 +1,252 @@
+@use 'index' as *;
+
+// =============================================================================
+// IMPACT METRICS — Bento Grid
+// Áreas: avail(2col) · years · projects / narr(2col) · sectors · delivery
+// =============================================================================
+
+$card-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+:host {
+  display: block;
+  background-color: $surface-container-low;
+}
+
+.impact-metrics {
+  @include section-padding;
+}
+
+// -----------------------------------------------------------------------------
+// SECTION HEADER
+// -----------------------------------------------------------------------------
+
+.metrics-header {
+  margin-bottom: $space-10;
+  max-width: 520px;
+}
+
+.metrics-eyebrow {
+  @include type(label-lg);
+  color: $on-surface-variant;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: $space-3;
+}
+
+.metrics-heading {
+  @include type(display-md);
+  color: $on-surface;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.metrics-heading__accent {
+  font-style: normal;
+  display: block;
+  @include gradient-signature(text);
+}
+
+// -----------------------------------------------------------------------------
+// BENTO GRID — 4 columns, 2 rows
+// Row 1: avail(2) | years | projects
+// Row 2: narr(2)  | sectors | delivery
+// -----------------------------------------------------------------------------
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "avail    avail    years     projects"
+    "narr     narr     sectors   delivery";
+  gap: $space-4;  // modular spacing: 16px — mathematically perfect from our scale
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "avail    avail"
+      "years    projects"
+      "narr     narr"
+      "sectors  delivery";
+  }
+
+  @include respond-to(sm) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "avail"
+      "years"
+      "projects"
+      "narr"
+      "sectors"
+      "delivery";
+  }
+}
+
+// -----------------------------------------------------------------------------
+// BASE CARD — shared foundation
+// -----------------------------------------------------------------------------
+
+.metric-card {
+  border-radius: $radius-xl; // 12px — as specified
+  padding: $space-8;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 320ms $card-ease,
+    box-shadow 320ms $card-ease;
+
+  // "No-Line" rule: depth via tonal layering, not borders
+
+  &:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0px 20px 48px rgba($on-surface, 0.08);
+  }
+
+  @include respond-to(sm) {
+    padding: $space-6;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// VARIANTS
+// -----------------------------------------------------------------------------
+
+// FEATURED — dark premium card (avail: 99.9%)
+// The "anchor" card with maximum visual weight
+.metric-card--featured {
+  background-color: $inverse-surface;
+
+  // Subtle gradient orb background
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -15%;
+    width: 60%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba($gradient-to, 0.25) 0%,
+      transparent 65%
+    );
+    pointer-events: none;
+  }
+
+  .metric-card__value {
+    @include gradient-signature(text);
+  }
+
+  .metric-card__label {
+    color: rgba($inverse-on-surface, 0.9);
+  }
+
+  .metric-card__desc {
+    color: rgba($inverse-on-surface, 0.5);
+  }
+}
+
+// DEFAULT — clean white cards
+.metric-card--default {
+  background-color: $surface-container-lowest;
+
+  .metric-card__value {
+    color: $on-surface;
+  }
+}
+
+// WARM — highlighted insight card (secondary_fixed wash)
+// DESIGN.md: "Use secondary_fixed for highlighting important insights"
+.metric-card--warm {
+  background-color: $secondary-fixed; // #ffdcbd
+
+  .metric-card__value {
+    @include gradient-signature(text);
+  }
+
+  .metric-card__label {
+    color: $on-surface;
+  }
+
+  .metric-card__desc {
+    color: $on-surface-variant;
+  }
+}
+
+// NARRATIVE — text-focused, warm tint
+.metric-card--narrative {
+  background-color: $surface-container;
+  display: flex;
+  align-items: center;
+}
+
+// -----------------------------------------------------------------------------
+// CARD CONTENT — numeric cards
+// -----------------------------------------------------------------------------
+
+.metric-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  height: 100%;
+}
+
+// The count-up number — high-impact typography
+.metric-card__value {
+  font-family: $font-display;
+  font-size: clamp(2.75rem, 4vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0;
+
+  // Default: on-surface (overridden by variants above)
+  color: $primary;
+}
+
+.metric-card__label {
+  @include type(label-lg);
+  color: $on-surface-variant;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.metric-card__desc {
+  @include type(body-md);
+  color: $on-surface-variant;
+  line-height: 1.55;
+  margin: 0;
+  margin-top: auto; // pushes to bottom of card
+  padding-top: $space-2;
+}
+
+// -----------------------------------------------------------------------------
+// NARRATIVE CARD CONTENT
+// -----------------------------------------------------------------------------
+
+.metric-card__narrative {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.metric-card__narrative-icon {
+  font-size: 1.5rem;
+  @include gradient-signature(text);
+  line-height: 1;
+}
+
+.metric-card__narrative-title {
+  @include type(headline-sm);
+  color: $on-surface;
+  margin: 0;
+  max-width: 28ch;
+}
+
+.metric-card__narrative-body {
+  @include type(body-lg);
+  color: $on-surface-variant;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 52ch;
+}

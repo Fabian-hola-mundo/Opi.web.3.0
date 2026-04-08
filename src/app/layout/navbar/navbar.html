@@ -1,0 +1,78 @@
+<header class="nav-bar" [class.is-scrolled]="isScrolled()">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <a class="nav-logo"
+       [routerLink]="['/']"
+       aria-label="OPI — Ir al inicio"
+       (click)="closeMobileMenu()">
+      <span class="nav-logo__text" aria-hidden="true">OPI</span>
+      <span class="nav-logo__dot" aria-hidden="true"></span>
+    </a>
+
+    <!-- Desktop nav links -->
+    <nav class="nav-links" aria-label="Navegación principal">
+      @for (item of navItems; track item.fragment) {
+        <a class="nav-link"
+           [routerLink]="['/']"
+           [fragment]="item.fragment"
+           routerLinkActive="nav-link--active">
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+
+    <!-- CTA -->
+    <a class="nav-cta"
+       [routerLink]="['/']"
+       fragment="contacto"
+       aria-label="Ir a la sección de contacto">
+      Hablemos
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="nav-toggle"
+            type="button"
+            [attr.aria-expanded]="isMobileMenuOpen()"
+            aria-controls="mobile-menu"
+            aria-label="Abrir menú de navegación"
+            (click)="toggleMobileMenu()">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu"
+     id="mobile-menu"
+     role="dialog"
+     aria-label="Menú de navegación"
+     [attr.aria-hidden]="!isMobileMenuOpen()">
+  <nav aria-label="Navegación móvil">
+    @for (item of navItems; track item.fragment) {
+      <a class="mobile-menu__link"
+         [routerLink]="['/']"
+         [fragment]="item.fragment"
+         (click)="closeMobileMenu()">
+        {{ item.label }}
+      </a>
+    }
+    <a class="mobile-menu__cta"
+       [routerLink]="['/']"
+       fragment="contacto"
+       (click)="closeMobileMenu()">
+      Hablemos
+    </a>
+  </nav>
+</div>
+
+<!-- Overlay -->
+@if (isMobileMenuOpen()) {
+  <div class="nav-overlay"
+       aria-hidden="true"
+       (click)="closeMobileMenu()">
+  </div>
+}

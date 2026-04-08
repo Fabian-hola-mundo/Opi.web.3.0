@@ -1,0 +1,53 @@
+<section class="pain-block" id="servicios" aria-labelledby="pain-heading">
+  <div class="container">
+    <div class="pain-grid">
+
+      <!-- ─── LEFT: Authority narrative ─── -->
+      <div class="pain-narrative" appReveal>
+
+        <p class="pain-narrative__eyebrow">Reconoce el patrón</p>
+
+        <h2 class="pain-narrative__headline" id="pain-heading">
+          El costo oculto de contratar
+          <em class="pain-narrative__accent">sin garantías reales</em>
+        </h2>
+
+        <p class="pain-narrative__copy">
+          Los proyectos de alto impacto fallan sistemáticamente por las mismas
+          razones: complejidad subestimada, compromisos sin respaldo y equipos
+          internos que terminan absorbiendo el riesgo que nunca debió ser suyo.
+        </p>
+
+        <a class="pain-narrative__link"
+           [routerLink]="['/']"
+           fragment="bridge"
+           aria-label="Ver cómo OPI resuelve estos problemas">
+          Ver cómo lo resolvemos
+          <span aria-hidden="true" class="pain-narrative__link-arrow">→</span>
+        </a>
+
+      </div>
+
+      <!-- ─── RIGHT: Bento Grid ─── -->
+      <div class="pain-bento" role="list" aria-label="Principales puntos de dolor">
+
+        @for (card of painCards; track card.id; let i = $index) {
+          <article class="pain-card"
+                   role="listitem"
+                   appReveal
+                   [revealDelay]="i * 110">
+
+            <span class="pain-card__number" aria-hidden="true">{{ card.number }}</span>
+
+            <h3 class="pain-card__title">{{ card.title }}</h3>
+
+            <p class="pain-card__description">{{ card.description }}</p>
+
+          </article>
+        }
+
+      </div>
+
+    </div>
+  </div>
+</section>

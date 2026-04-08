@@ -1,0 +1,335 @@
+@use 'index' as *;
+
+// =============================================================================
+// TRUST BAR — Alta Fidelidad
+// Marquee infinita · Grayscale 100% → color · Testimonial card premium
+// =============================================================================
+
+$track-speed:   40s;
+$logo-gap:      $space-10;
+$mask-width:    140px;
+$card-ease:     cubic-bezier(0.16, 1, 0.3, 1);
+
+// -----------------------------------------------------------------------------
+// KEYFRAMES
+// -----------------------------------------------------------------------------
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes card-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// SECTION — "Minimalismo de Autoridad"
+// Surface-container-low: separación tonal del Hero oscuro sin usar línea
+// -----------------------------------------------------------------------------
+
+:host {
+  display: block;
+  background-color: $surface-container-low;
+}
+
+.trust-bar {
+  padding-block: $space-10 $space-12;
+}
+
+// -----------------------------------------------------------------------------
+// HEADER
+// -----------------------------------------------------------------------------
+
+.trust-bar__header {
+  margin-bottom: $space-8;
+  text-align: center;
+}
+
+.trust-bar__eyebrow {
+  @include type(label-md);
+  color: $on-surface-variant;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+
+  // Tiny gradient rule above the text
+  display: inline-flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: linear-gradient(90deg, transparent, rgba($on-surface, 0.2));
+  }
+
+  &::after {
+    background: linear-gradient(90deg, rgba($on-surface, 0.2), transparent);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// CAROUSEL
+// -----------------------------------------------------------------------------
+
+.track-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+// Fade masks — soft edge fade for institutional depth
+.track-mask {
+  position: absolute;
+  inset-block: 0;
+  width: $mask-width;
+  z-index: 2;
+  pointer-events: none;
+
+  &--left {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      $surface-container-low 0%,
+      rgba($surface-container-low, 0) 100%
+    );
+  }
+
+  &--right {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      $surface-container-low 0%,
+      rgba($surface-container-low, 0) 100%
+    );
+  }
+}
+
+.logo-track {
+  display: flex;
+  align-items: center;
+  gap: $logo-gap;
+  width: max-content;
+  padding-block: $space-3;
+  animation: marquee $track-speed linear infinite;
+  will-change: transform;
+
+  &.is-paused {
+    animation-play-state: paused;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// LOGO ITEMS
+// -----------------------------------------------------------------------------
+
+.logo-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: $space-3 $space-4;
+  border-radius: $radius-lg;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+
+  img {
+    display: block;
+    // Default: full grayscale, 60% opacity — institutional and clean
+    filter: grayscale(100%) opacity(0.6);
+    transition:
+      filter 350ms ease,
+      transform 250ms $card-ease;
+    user-select: none;
+    pointer-events: none;
+    will-change: filter;
+  }
+
+  &:hover,
+  &.is-active,
+  &:focus-visible {
+    background-color: rgba($on-surface, 0.04);
+
+    img {
+      // Reveal: full color, full opacity
+      filter: grayscale(0%) opacity(1);
+      transform: scale(1.04);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 3px;
+  }
+
+  // Dupe items match the visual but carry no interaction
+  &--dupe {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// TESTIMONIAL SLOT
+// Dedicated area — prevents layout shift, always reserves space
+// -----------------------------------------------------------------------------
+
+.testimonial-slot {
+  min-height: 188px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: $space-8;
+
+  @include respond-to(sm) {
+    min-height: 220px;
+    padding-top: $space-6;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// TESTIMONIAL CARD — produto final visual
+// -----------------------------------------------------------------------------
+
+.testimonial-card {
+  width: 100%;
+  max-width: 700px;
+  margin: 0;
+
+  // Frosted glass on the light surface
+  background-color: rgba($surface-container-lowest, 0.82);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+
+  // 12px radius — as specified in design system
+  border-radius: $radius-xl;
+
+  // Ghost border — accessibility fallback at low opacity
+  @include ghost-border($outline-variant, 1px);
+
+  // Ambient shadow — "subtle authority"
+  @include elevation(ambient);
+
+  padding: $space-6 $space-8;
+  animation: card-reveal 300ms $card-ease both;
+
+  @include respond-to(sm) {
+    padding: $space-5 $space-5;
+  }
+
+  // Signature gradient: 2px top-border on "Featured" card
+  // DON'T apply gradient-signature here — already used in hero/CTA (max 2/screen)
+  // Use a thin primary-colored top accent instead
+  border-top: 2px solid $primary;
+}
+
+// Stars
+.testimonial-card__stars {
+  margin-bottom: $space-3;
+
+  span {
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    // Gradient on stars — elegant touch
+    background: linear-gradient(90deg, $gradient-from, $gradient-to);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// Quote
+.testimonial-card__quote {
+  @include type(body-lg);
+  color: $on-surface;
+  font-style: italic;
+  line-height: 1.7;
+  margin: 0 0 $space-5;
+  position: relative;
+
+  // Large decorative opening mark
+  &::before {
+    content: '\201C';
+    font-family: $font-display;
+    font-size: 4.5rem;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 0;
+    vertical-align: -0.75rem;
+    margin-inline-end: $space-1;
+    opacity: 0.12;
+    color: $on-surface;
+  }
+}
+
+// Author row
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding-top: $space-5;
+  // Tonal separator — no line, just spacing + slight color shift
+  border-top: 1px solid rgba($on-surface, 0.07);
+}
+
+// Avatar wrapper — perfect circle + subtle ring
+.testimonial-card__avatar-wrap {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  // Double ring: inner white + outer brand
+  box-shadow:
+    0 0 0 2px $surface-container-lowest,
+    0 0 0 3px rgba($primary, 0.25);
+  overflow: hidden;
+}
+
+.testimonial-card__avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+// Meta text
+.testimonial-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.testimonial-card__name {
+  @include type(label-lg);
+  font-weight: 600; // SemiBold — as specified
+  color: $on-surface;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.testimonial-card__role {
+  @include type(label-md);
+  color: $on-surface-variant;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.testimonial-card__sep {
+  margin-inline: $space-1;
+  opacity: 0.5;
+}

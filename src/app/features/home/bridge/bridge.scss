@@ -1,0 +1,193 @@
+@use 'index' as *;
+
+// =============================================================================
+// BRIDGE — Transición de impacto
+// Fondo oscuro (inverse-surface) · Efecto "nitidez progresiva" al scroll
+// El texto pasa de borroso/opaco a nítido/pleno cuando el usuario llega.
+// =============================================================================
+
+$reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+$reveal-duration: 900ms;
+
+:host {
+  display: block;
+  background-color: $inverse-surface;
+  position: relative;
+  overflow: hidden;
+}
+
+.bridge-inner {
+  @include section-padding;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+// -----------------------------------------------------------------------------
+// DECORATIVE ORBS — gradient atmosphere, aria-hidden
+// -----------------------------------------------------------------------------
+
+.bridge-orb {
+  position: absolute;
+  width: 40vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+
+  &--left {
+    bottom: -20%;
+    left: -10%;
+    background: radial-gradient(
+      circle at center,
+      rgba($gradient-to, 0.15) 0%,
+      transparent 65%
+    );
+  }
+
+  &--right {
+    top: -20%;
+    right: -10%;
+    background: radial-gradient(
+      circle at center,
+      rgba($gradient-from, 0.1) 0%,
+      transparent 65%
+    );
+  }
+}
+
+// -----------------------------------------------------------------------------
+// EYEBROW
+// -----------------------------------------------------------------------------
+
+.bridge-eyebrow {
+  @include type(label-lg);
+  color: rgba($inverse-on-surface, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: $space-6;
+
+  // Default blurred state
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(12px);
+  transition:
+    opacity 500ms $reveal-ease 100ms,
+    filter 500ms $reveal-ease 100ms,
+    transform 500ms $reveal-ease 100ms;
+
+  :host.is-focused & {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// MAIN STATEMENT — el efecto central de "nitidez progresiva"
+// Empieza en un estado de "fuera de foco": borroso, pequeño, transparente.
+// Al entrar en viewport → nítido, escala completa, opacidad 1.
+// -----------------------------------------------------------------------------
+
+.bridge-statement {
+  font-family: $font-display;
+  font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: $inverse-on-surface;
+  max-width: 18ch;
+  margin: 0 auto $space-8;
+
+  // "Out of focus" initial state
+  opacity: 0.2;
+  filter: blur(6px);
+  transform: scale(0.94);
+  transition:
+    opacity $reveal-duration $reveal-ease,
+    filter $reveal-duration $reveal-ease,
+    transform $reveal-duration $reveal-ease;
+
+  :host.is-focused & {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.bridge-statement__break {
+  // Forces the accent to appear on a new visual "line" at mid-sizes
+  display: inline;
+}
+
+.bridge-statement__accent {
+  font-style: normal;
+  display: block;
+  @include gradient-signature(text);
+}
+
+// -----------------------------------------------------------------------------
+// SUPPORTING COPY
+// -----------------------------------------------------------------------------
+
+.bridge-copy {
+  @include type(title-md);
+  color: rgba($inverse-on-surface, 0.6);
+  max-width: 52ch;
+  margin: 0 auto $space-10;
+  line-height: 1.65;
+
+  // Delayed reveal after the headline
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 700ms $reveal-ease 200ms,
+    transform 700ms $reveal-ease 200ms;
+
+  :host.is-focused & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @include respond-to(sm) {
+    @include type(body-lg);
+    color: rgba($inverse-on-surface, 0.6);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// CTA BUTTON
+// -----------------------------------------------------------------------------
+
+.bridge-cta {
+  @include type(label-lg);
+  @include gradient-signature;
+  color: $on-primary;
+  text-decoration: none;
+  display: inline-block;
+  padding: $space-3 $space-8;
+  border-radius: $radius-md;
+  transition: opacity 200ms ease, transform 200ms ease;
+
+  // Delayed reveal after copy
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 700ms $reveal-ease 350ms,
+    transform 700ms $reveal-ease 350ms;
+
+  :host.is-focused & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    text-decoration: none;
+    opacity: 0.88;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $gradient-from;
+    outline-offset: 3px;
+  }
+}

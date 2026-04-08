@@ -1,0 +1,111 @@
+<section class="booking-section" id="contacto" aria-labelledby="booking-heading">
+  <div class="container">
+    <div class="booking-grid">
+
+      <!-- ─── LEFT: Authority copy ─── -->
+      <div class="booking-copy">
+
+        <p class="booking-copy__eyebrow">
+          Consultoría técnica · Sesión gratuita
+        </p>
+
+        <h2 class="booking-copy__headline" id="booking-heading">
+          Una hora con el equipo que lideró infraestructura
+          <em class="booking-copy__accent">crítica del Estado.</em>
+        </h2>
+
+        <p class="booking-copy__lead">
+          Esta no es una llamada de ventas. Es una sesión técnica donde
+          analizamos tu situación real, identificamos los riesgos no visibles
+          y trazamos una hoja de ruta concreta. Sin compromisos, con total
+          transparencia.
+        </p>
+
+        <!-- Feature list -->
+        <ul class="booking-features" aria-label="Qué incluye la sesión">
+          @for (feature of features; track feature.text) {
+            <li class="booking-feature">
+              <span class="booking-feature__mark" aria-hidden="true">→</span>
+              <span>{{ feature.text }}</span>
+            </li>
+          }
+        </ul>
+
+        <!-- Availability note -->
+        <p class="booking-copy__note" role="note">
+          <span class="booking-copy__note-dot" aria-hidden="true"></span>
+          Disponibilidad limitada — Agenda directamente con nuestro equipo técnico.
+        </p>
+
+        <!-- Visual CTA arrow (desktop: points right; mobile: hides) -->
+        <div class="booking-copy__pointer" aria-hidden="true">
+          <span class="booking-copy__pointer-text">Tu calendario está aquí</span>
+          <span class="booking-copy__pointer-arrow">→</span>
+        </div>
+
+      </div>
+
+      <!-- ─── RIGHT: Booking widget ─── -->
+      <div class="booking-widget"
+           role="region"
+           aria-label="Widget de agendamiento Microsoft Bookings">
+
+        <!-- Glass container -->
+        <div class="booking-frame-wrap">
+
+          <!-- Skeleton — visible while iframe loads -->
+          @if (isLoading()) {
+            <div class="booking-skeleton" aria-busy="true" aria-label="Cargando calendario de agendamiento">
+              <div class="booking-skeleton__bar booking-skeleton__bar--wide"></div>
+              <div class="booking-skeleton__bar booking-skeleton__bar--medium"></div>
+              <div class="booking-skeleton__bar booking-skeleton__bar--narrow"></div>
+              <div class="booking-skeleton__calendar">
+                @for (row of [1,2,3,4,5]; track row) {
+                  <div class="booking-skeleton__cal-row">
+                    @for (cell of [1,2,3,4,5,6,7]; track cell) {
+                      <div class="booking-skeleton__cal-cell"></div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Iframe — always in DOM so it loads immediately -->
+          @if (safeSrc(); as src) {
+            <iframe
+              class="booking-iframe"
+              [class.is-visible]="!isLoading()"
+              [src]="src"
+              title="Agenda una sesión con OPI — Microsoft Bookings"
+              frameborder="0"
+              scrolling="yes"
+              allowfullscreen
+              (load)="onIframeLoad()">
+            </iframe>
+          }
+
+        </div>
+
+        <!-- Alt contact hint -->
+        <p class="booking-widget__alt">
+          ¿Prefieres otra vía?
+          <a class="booking-widget__alt-link"
+             href="https://wa.me/573000000000"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Contáctanos por WhatsApp">
+            Escríbenos por WhatsApp
+          </a>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Decorative orbs — aria-hidden -->
+  <div class="booking-orb booking-orb--a" aria-hidden="true"></div>
+  <div class="booking-orb booking-orb--b" aria-hidden="true"></div>
+
+</section>

@@ -1,0 +1,7 @@
+@use 'index' as *;
+
+// Offset content below fixed navbar
+.layout-main {
+  padding-top: 72px; // matches $nav-height in navbar.scss
+  min-height: calc(100dvh - 72px);
+}

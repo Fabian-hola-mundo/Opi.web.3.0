@@ -1,0 +1,194 @@
+// =============================================================================
+// MIXINS — OpiWeb 2026
+// =============================================================================
+
+@use 'tokens' as t;
+
+// -----------------------------------------------------------------------------
+// RESPONSIVE BREAKPOINTS (Desktop-first)
+// Usage: @include respond-to(md) { ... }
+// -----------------------------------------------------------------------------
+
+@mixin respond-to($bp) {
+  @if $bp == xl    { @media (max-width: #{t.$bp-xl})  { @content; } }
+  @else if $bp == lg { @media (max-width: #{t.$bp-lg}) { @content; } }
+  @else if $bp == md { @media (max-width: #{t.$bp-md}) { @content; } }
+  @else if $bp == sm { @media (max-width: #{t.$bp-sm}) { @content; } }
+  @else if $bp == xs { @media (max-width: #{t.$bp-xs}) { @content; } }
+}
+
+// -----------------------------------------------------------------------------
+// SIGNATURE GRADIENT
+// Orange (#fc9d23) → Purple (#7d3693).
+// DO NOT use for more than 2 elements per screen.
+// Usage: @include gradient-signature;           // background
+//        @include gradient-signature(text);      // gradient text
+//        @include gradient-signature(border);    // 2px top-border on cards
+// -----------------------------------------------------------------------------
+
+@mixin gradient-signature($variant: bg) {
+  @if $variant == bg {
+    background: linear-gradient(135deg, t.$gradient-from 0%, t.$gradient-to 100%);
+  } @else if $variant == text {
+    background: linear-gradient(135deg, t.$gradient-from 0%, t.$gradient-to 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  } @else if $variant == border {
+    border-top: 2px solid transparent;
+    background-image:
+      linear-gradient(t.$surface-container-lowest, t.$surface-container-lowest),
+      linear-gradient(135deg, t.$gradient-from 0%, t.$gradient-to 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// GLASSMORPHISM
+// For floating menus / nav over hero sections.
+// Usage: @include glass;
+// -----------------------------------------------------------------------------
+
+@mixin glass($bg: t.$surface, $opacity: 0.8, $blur: 20px) {
+  background: rgba($bg, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+// -----------------------------------------------------------------------------
+// ELEVATION (Shadow)
+// Use sparingly — prefer tonal layering.
+// Usage: @include elevation(ambient);  // Modals/popovers
+//        @include elevation(card);     // Card soft lift (rare)
+// -----------------------------------------------------------------------------
+
+@mixin elevation($level: ambient) {
+  @if $level == ambient {
+    box-shadow: t.$shadow-ambient;
+  } @else if $level == card {
+    box-shadow: t.$shadow-card;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// GHOST BORDER
+// Accessibility fallback — only when color shift alone is insufficient.
+// Usage: @include ghost-border;
+// -----------------------------------------------------------------------------
+
+@mixin ghost-border($color: t.$outline-variant, $width: 1px) {
+  border: $width solid rgba($color, 0.15);
+}
+
+// -----------------------------------------------------------------------------
+// TYPOGRAPHY HELPERS
+// Usage: @include type(display-lg);
+// -----------------------------------------------------------------------------
+
+@mixin type($level) {
+  @if $level == display-lg {
+    font-family: t.$font-display;
+    font-size: t.$type-display-lg-size;
+    font-weight: t.$type-display-lg-weight;
+    line-height: t.$type-display-lg-line;
+    letter-spacing: -0.02em;
+  } @else if $level == display-md {
+    font-family: t.$font-display;
+    font-size: t.$type-display-md-size;
+    font-weight: t.$type-display-md-weight;
+    line-height: t.$type-display-md-line;
+    letter-spacing: -0.015em;
+  } @else if $level == headline-md {
+    font-family: t.$font-display;
+    font-size: t.$type-headline-md-size;
+    font-weight: t.$type-headline-md-weight;
+    line-height: t.$type-headline-md-line;
+    letter-spacing: -0.01em;
+  } @else if $level == headline-sm {
+    font-family: t.$font-display;
+    font-size: t.$type-headline-sm-size;
+    font-weight: t.$type-headline-sm-weight;
+    line-height: t.$type-headline-sm-line;
+  } @else if $level == title-lg {
+    font-family: t.$font-body;
+    font-size: t.$type-title-lg-size;
+    font-weight: t.$type-title-lg-weight;
+    line-height: t.$type-title-lg-line;
+  } @else if $level == title-md {
+    font-family: t.$font-body;
+    font-size: t.$type-title-md-size;
+    font-weight: t.$type-title-md-weight;
+    line-height: t.$type-title-md-line;
+  } @else if $level == body-lg {
+    font-family: t.$font-body;
+    font-size: t.$type-body-lg-size;
+    font-weight: t.$type-body-lg-weight;
+    line-height: t.$type-body-lg-line;
+  } @else if $level == body-md {
+    font-family: t.$font-body;
+    font-size: t.$type-body-md-size;
+    font-weight: t.$type-body-md-weight;
+    line-height: t.$type-body-md-line;
+  } @else if $level == label-lg {
+    font-family: t.$font-label;
+    font-size: t.$type-label-lg-size;
+    font-weight: t.$type-label-lg-weight;
+    line-height: t.$type-label-lg-line;
+    letter-spacing: 0.01em;
+  } @else if $level == label-md {
+    font-family: t.$font-label;
+    font-size: t.$type-label-md-size;
+    font-weight: t.$type-label-md-weight;
+    line-height: t.$type-label-md-line;
+    letter-spacing: 0.015em;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// SECTION LAYOUT
+// Standard section padding following the modular spacing scale.
+// Usage: @include section-padding;
+//        @include section-padding(compact);
+// -----------------------------------------------------------------------------
+
+@mixin section-padding($size: default) {
+  @if $size == default {
+    padding-block: t.$space-20;
+    padding-inline: t.$space-8;
+
+    @include respond-to(md) {
+      padding-block: t.$space-12;
+      padding-inline: t.$space-6;
+    }
+
+    @include respond-to(sm) {
+      padding-block: t.$space-8;
+      padding-inline: t.$space-4;
+    }
+  } @else if $size == compact {
+    padding-block: t.$space-12;
+    padding-inline: t.$space-8;
+
+    @include respond-to(md) {
+      padding-block: t.$space-8;
+    }
+
+    @include respond-to(sm) {
+      padding-block: t.$space-6;
+      padding-inline: t.$space-4;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// CONTENT CONTAINER
+// Max-width wrapper — consistent across all sections.
+// Usage: @include container;
+// -----------------------------------------------------------------------------
+
+@mixin container($max: 1200px) {
+  width: 100%;
+  max-width: $max;
+  margin-inline: auto;
+}

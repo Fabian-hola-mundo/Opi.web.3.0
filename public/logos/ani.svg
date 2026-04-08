@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="48" viewBox="0 0 128 48">
+  <rect x="0" y="6" width="3" height="36" rx="1.5" fill="#c23b22"/>
+  <text x="14" y="28" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#1b1b1c" letter-spacing="-0.5">ANI</text>
+  <text x="14" y="40" font-family="Inter, Arial, sans-serif" font-size="7.5" font-weight="400" fill="#4e4546" letter-spacing="0.8">INFRAESTRUCTURA</text>
+</svg>

@@ -1,0 +1,225 @@
+@use 'index' as *;
+
+// =============================================================================
+// FOOTER — OpiWeb 2026
+// Dark foundation matching the Nav anchor.
+// Trifecta de Contacto: WhatsApp · Booking · Formulario de Retos
+// =============================================================================
+
+:host {
+  display: block;
+  background-color: $inverse-surface;
+}
+
+.footer {
+  padding-block: $space-16 $space-8;
+
+  @include respond-to(sm) {
+    padding-block: $space-10 $space-6;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// GRID — 3 columns on desktop, stacked on mobile
+// -----------------------------------------------------------------------------
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr;
+  gap: $space-12;
+  padding-bottom: $space-10;
+  border-bottom: 1px solid rgba($inverse-on-surface, 0.1);
+
+  @include respond-to(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include respond-to(sm) {
+    grid-template-columns: 1fr;
+    gap: $space-8;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// BRAND COLUMN
+// -----------------------------------------------------------------------------
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  @include respond-to(md) {
+    grid-column: 1 / -1;
+  }
+
+  @include respond-to(sm) {
+    grid-column: auto;
+  }
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  text-decoration: none;
+
+  &:hover { text-decoration: none; }
+  &:focus-visible { outline-color: $inverse-on-surface; }
+}
+
+.footer-logo__text {
+  font-family: $font-display;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: $inverse-on-surface;
+}
+
+.footer-logo__dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  @include gradient-signature;
+}
+
+.footer-tagline {
+  @include type(body-md);
+  color: rgba($inverse-on-surface, 0.55);
+  max-width: 28ch;
+  line-height: 1.65;
+}
+
+// -----------------------------------------------------------------------------
+// NAV COLUMN
+// -----------------------------------------------------------------------------
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+  }
+}
+
+.footer-nav__heading {
+  @include type(label-lg);
+  color: rgba($inverse-on-surface, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.footer-nav__link {
+  @include type(body-md);
+  color: rgba($inverse-on-surface, 0.65);
+  text-decoration: none;
+  transition: color 200ms ease;
+
+  &:hover {
+    color: $inverse-on-surface;
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline-color: $inverse-on-surface;
+    border-radius: $radius-sm;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// CONTACT COLUMN — Trifecta de Contacto
+// -----------------------------------------------------------------------------
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+// Contact items
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-radius: $radius-lg;
+  text-decoration: none;
+  background-color: rgba($inverse-on-surface, 0.04);
+  border: 1px solid rgba($inverse-on-surface, 0.08);
+  transition: background-color 200ms ease, border-color 200ms ease;
+
+  &:hover {
+    background-color: rgba($inverse-on-surface, 0.08);
+    border-color: rgba($inverse-on-surface, 0.15);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $inverse-on-surface;
+    outline-offset: 3px;
+  }
+}
+
+.contact-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.contact-item__label {
+  @include type(label-lg);
+  color: $inverse-on-surface;
+}
+
+// Per-channel accent colors on the icon background
+.contact-item--whatsapp .contact-item__icon {
+  background-color: rgba(#25d366, 0.15);
+  color: #25d366;
+}
+
+.contact-item--booking .contact-item__icon {
+  @include gradient-signature;
+  color: $on-primary;
+}
+
+.contact-item--form .contact-item__icon {
+  background-color: rgba($primary-container, 0.2);
+  color: rgba($inverse-on-surface, 0.8);
+}
+
+// -----------------------------------------------------------------------------
+// BOTTOM BAR
+// -----------------------------------------------------------------------------
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $space-6;
+  gap: $space-4;
+
+  @include respond-to(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-2;
+  }
+}
+
+.footer-legal {
+  @include type(label-md);
+  color: rgba($inverse-on-surface, 0.35);
+
+  &--muted {
+    color: rgba($inverse-on-surface, 0.25);
+  }
+}

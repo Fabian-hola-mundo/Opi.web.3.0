@@ -1,0 +1,13 @@
+// =============================================================================
+// STYLES INDEX — OpiWeb 2026
+//
+// Entry point for component-level SCSS files.
+// Usage in component .scss files:
+//   @use 'styles' as *;
+//
+// This gives access to all tokens and mixins without CSS output
+// (partials don't emit CSS when @use'd — only the root styles.scss does).
+// =============================================================================
+
+@forward 'tokens';
+@forward 'mixins';

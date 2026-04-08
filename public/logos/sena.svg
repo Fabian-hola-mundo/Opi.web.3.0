@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="48" viewBox="0 0 128 48">
+  <rect x="0" y="6" width="3" height="36" rx="1.5" fill="#00a86b"/>
+  <text x="14" y="27" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#1b1b1c" letter-spacing="-0.6">SENA</text>
+  <text x="14" y="40" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="400" fill="#4e4546" letter-spacing="1.2">COLOMBIA</text>
+</svg>

@@ -1,0 +1,96 @@
+<section class="trust-bar" aria-labelledby="trust-bar-heading">
+
+  <!-- Header -->
+  <div class="trust-bar__header container">
+    <p class="trust-bar__eyebrow" id="trust-bar-heading" aria-label="Entidades que confían en OPI">
+      Confían en OPI
+    </p>
+  </div>
+
+  <!-- Carousel -->
+  <div class="track-wrapper" role="region" aria-label="Logos de clientes">
+
+    <div class="track-mask track-mask--left" aria-hidden="true"></div>
+    <div class="track-mask track-mask--right" aria-hidden="true"></div>
+
+    <div class="logo-track" [class.is-paused]="isPaused()">
+
+      <!-- Semantic set — interactive -->
+      @for (logo of logos; track logo.id) {
+        <button class="logo-item"
+                type="button"
+                [attr.aria-label]="'Ver testimonio: ' + logo.name"
+                [class.is-active]="hoveredId() === logo.id"
+                (mouseenter)="onLogoEnter(logo.id)"
+                (mouseleave)="onLogoLeave()"
+                (focus)="onLogoEnter(logo.id)"
+                (blur)="onLogoLeave()">
+          <img [ngSrc]="logo.logoSrc"
+               [width]="logo.logoWidth"
+               [height]="logo.logoHeight"
+               [alt]="logo.name"
+               loading="lazy" />
+        </button>
+      }
+
+      <!-- Duplicate set — decorative, seamless loop -->
+      @for (logo of dupLogos; track logo.id) {
+        <div class="logo-item logo-item--dupe" aria-hidden="true">
+          <img [src]="logo.logoSrc"
+               [width]="logo.logoWidth"
+               [height]="logo.logoHeight"
+               alt=""
+               loading="lazy"
+               draggable="false" />
+        </div>
+      }
+
+    </div>
+  </div>
+
+  <!-- Testimonial slot -->
+  <div class="testimonial-slot container"
+       role="region"
+       aria-label="Testimonio del cliente"
+       aria-live="polite"
+       aria-atomic="true">
+
+    @if (activeTestimonial(); as client) {
+      <figure class="testimonial-card">
+
+        <!-- Stars -->
+        <div class="testimonial-card__stars" aria-label="Valoración: 5 de 5 estrellas" role="img">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+
+        <!-- Quote -->
+        <blockquote class="testimonial-card__quote">
+          {{ client.testimonial.quote }}
+        </blockquote>
+
+        <!-- Author -->
+        <figcaption class="testimonial-card__author">
+          <div class="testimonial-card__avatar-wrap">
+            <img class="testimonial-card__avatar"
+                 [ngSrc]="client.testimonial.avatarSrc"
+                 width="48"
+                 height="48"
+                 [alt]="client.testimonial.authorName"
+                 loading="lazy" />
+          </div>
+          <div class="testimonial-card__meta">
+            <p class="testimonial-card__name">{{ client.testimonial.authorName }}</p>
+            <p class="testimonial-card__role">
+              {{ client.testimonial.authorRole }}
+              <span class="testimonial-card__sep" aria-hidden="true">·</span>
+              {{ client.testimonial.authorCompany }}
+            </p>
+          </div>
+        </figcaption>
+
+      </figure>
+    }
+
+  </div>
+
+</section>

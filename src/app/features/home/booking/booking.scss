@@ -1,0 +1,339 @@
+@use 'index' as *;
+
+// =============================================================================
+// BOOKING — Agendamiento Estratégico
+// Dark-toned conversion section with glassmorphism calendar widget
+// =============================================================================
+
+$widget-radius: $radius-xl; // 12px
+$orb-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+// -----------------------------------------------------------------------------
+// HOST — dark differentiating background
+// -----------------------------------------------------------------------------
+
+:host {
+  display: block;
+  background-color: $inverse-surface; // #303031 — contrasts with Impact Metrics
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-section {
+  @include section-padding;
+}
+
+// -----------------------------------------------------------------------------
+// TWO-COLUMN GRID
+// Left: authority copy · Right: booking widget
+// -----------------------------------------------------------------------------
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-16;
+  align-items: center;
+
+  @include respond-to(lg) {
+    gap: $space-12;
+  }
+
+  @include respond-to(md) {
+    grid-template-columns: 1fr;
+    gap: $space-10;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// LEFT — AUTHORITY COPY
+// -----------------------------------------------------------------------------
+
+.booking-copy {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+}
+
+.booking-copy__eyebrow {
+  @include type(label-lg);
+  color: rgba($inverse-on-surface, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
+.booking-copy__headline {
+  @include type(display-sm);
+  color: $inverse-on-surface;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.booking-copy__accent {
+  font-style: normal;
+  display: block;
+  @include gradient-signature(text);
+}
+
+.booking-copy__lead {
+  @include type(body-lg);
+  color: rgba($inverse-on-surface, 0.7);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 42ch;
+}
+
+// Feature list
+.booking-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.booking-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  @include type(body-md);
+  color: rgba($inverse-on-surface, 0.85);
+  line-height: 1.5;
+}
+
+.booking-feature__mark {
+  @include gradient-signature(text);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px; // optical alignment with text baseline
+}
+
+// Availability note with pulsing dot
+.booking-copy__note {
+  @include type(label-md);
+  color: rgba($inverse-on-surface, 0.5);
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  margin: 0;
+}
+
+.booking-copy__note-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $gradient-from; // warm amber — signals live availability
+  flex-shrink: 0;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+// Desktop pointer arrow
+.booking-copy__pointer {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-top: $space-2;
+
+  @include respond-to(md) {
+    display: none;
+  }
+}
+
+.booking-copy__pointer-text {
+  @include type(label-md);
+  color: rgba($inverse-on-surface, 0.35);
+  font-style: italic;
+}
+
+.booking-copy__pointer-arrow {
+  @include gradient-signature(text);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+// -----------------------------------------------------------------------------
+// RIGHT — BOOKING WIDGET
+// -----------------------------------------------------------------------------
+
+.booking-widget {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+// Glassmorphism frame container
+.booking-frame-wrap {
+  position: relative;
+  border-radius: $widget-radius;
+  overflow: hidden;
+  min-height: 580px;
+
+  // Glass effect
+  background: rgba($inverse-on-surface, 0.04);
+  border: 1px solid rgba($inverse-on-surface, 0.12);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+
+  // Deep soft shadow
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 12px 32px rgba(0, 0, 0, 0.18),
+    0 40px 80px rgba(0, 0, 0, 0.22);
+
+  @include respond-to(sm) {
+    min-height: 520px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// SKELETON — shimmer placeholder while iframe loads
+// -----------------------------------------------------------------------------
+
+.booking-skeleton {
+  position: absolute;
+  inset: 0;
+  padding: $space-8;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  background: rgba($inverse-on-surface, 0.03);
+}
+
+// Shared shimmer base
+%shimmer-base {
+  border-radius: $radius-sm;
+  background: linear-gradient(
+    90deg,
+    rgba($inverse-on-surface, 0.06) 25%,
+    rgba($inverse-on-surface, 0.12) 50%,
+    rgba($inverse-on-surface, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.booking-skeleton__bar {
+  @extend %shimmer-base;
+  height: 14px;
+
+  &--wide   { width: 70%; }
+  &--medium { width: 45%; }
+  &--narrow { width: 30%; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// Calendar grid skeleton
+.booking-skeleton__calendar {
+  margin-top: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  flex: 1;
+}
+
+.booking-skeleton__cal-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: $space-2;
+}
+
+.booking-skeleton__cal-cell {
+  @extend %shimmer-base;
+  aspect-ratio: 1;
+  border-radius: $radius-sm;
+}
+
+// -----------------------------------------------------------------------------
+// IFRAME — hidden until loaded, then fades in
+// -----------------------------------------------------------------------------
+
+.booking-iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: $widget-radius;
+  opacity: 0;
+  transition: opacity 400ms ease;
+
+  &.is-visible {
+    opacity: 1;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// ALT CONTACT HINT
+// -----------------------------------------------------------------------------
+
+.booking-widget__alt {
+  @include type(body-sm);
+  color: rgba($inverse-on-surface, 0.45);
+  text-align: center;
+  margin: 0;
+}
+
+.booking-widget__alt-link {
+  color: $gradient-from; // warm amber
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 200ms ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.75;
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $gradient-from;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// DECORATIVE ORBS — aria-hidden
+// -----------------------------------------------------------------------------
+
+.booking-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.booking-orb--a {
+  width: 480px;
+  height: 480px;
+  top: -20%;
+  right: -10%;
+  background: radial-gradient(
+    circle,
+    rgba($gradient-to, 0.18) 0%,
+    transparent 65%
+  );
+}
+
+.booking-orb--b {
+  width: 320px;
+  height: 320px;
+  bottom: -15%;
+  left: 5%;
+  background: radial-gradient(
+    circle,
+    rgba($gradient-from, 0.12) 0%,
+    transparent 65%
+  );
+}

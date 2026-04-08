@@ -1,0 +1,59 @@
+<section class="hero" id="hero" aria-labelledby="hero-headline">
+
+  <div class="hero-body container">
+
+    <!-- Eyebrow label -->
+    <p class="hero-eyebrow" aria-hidden="true">
+      Consultoría Especializada &middot; Colombia
+    </p>
+
+    <!-- Main headline -->
+    <h1 class="hero-headline" id="hero-headline">
+      Puente entre el<br>
+      <em class="hero-headline__accent">Sector Público</em><br>
+      y el <em class="hero-headline__accent">Privado</em>
+    </h1>
+
+    <!-- Sub-copy -->
+    <p class="hero-sub">
+      Transformamos nueve años de gestión en infraestructura crítica del
+      Estado en una credencial de confianza que abre puertas en el sector privado.
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero-actions" role="group" aria-label="Acciones principales">
+      <a class="btn-primary"
+         href="https://outlook.office365.com/book/opi"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Agenda una reunión con OPI (abre Microsoft Booking)">
+        Agenda una reunión
+      </a>
+      <a class="btn-secondary"
+         [routerLink]="['/']"
+         fragment="casos"
+         aria-label="Ver casos de éxito de OPI">
+        Ver casos de éxito
+        <span class="btn-secondary__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Trust metrics strip -->
+  <div class="hero-metrics" aria-label="Métricas de impacto">
+    <div class="container">
+      <ul class="metrics-grid" role="list">
+        @for (metric of metrics; track metric.label) {
+          <li class="metric-card">
+            <span class="metric-card__value" aria-label="{{ metric.value }}{{ metric.unit }}">
+              {{ metric.value }}<span class="metric-card__unit" aria-hidden="true">{{ metric.unit }}</span>
+            </span>
+            <span class="metric-card__label">{{ metric.label }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,221 @@
+// =============================================================================
+// DESIGN TOKENS — OpiWeb 2026
+// "Enterprise Editorial / Kinetic Architect"
+//
+// Usage in components: @use 'styles' as *;
+// All CSS Custom Properties are globally available on :root (via styles.scss).
+// SCSS variables here are aliases for use inside component SCSS files.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// COLOR PALETTE
+// Material-based tonal surface hierarchy. Boundaries via color shifts, NOT lines.
+// -----------------------------------------------------------------------------
+
+// -- Surface hierarchy (light mode) -------------------------------------------
+$surface:                  #fcf8f9;   // Base page background
+$surface-container-low:    #f6f3f4;   // Section backgrounds (Level 1)
+$surface-container:        #f0ecee;   // Mid-level container
+$surface-container-high:   #eae7e8;   // Elevated containers (Level 3)
+$surface-container-highest:#e0dcdd;   // Highest elevation surface
+$surface-container-lowest: #ffffff;   // Cards / interaction surfaces (Level 2)
+
+// -- Brand / Primary -----------------------------------------------------------
+$primary:                  #631b7a;   // Primary brand purple
+$primary-container:        #7d3693;   // Gradient end / light primary bg
+$on-primary:               #ffffff;   // Text/icons on primary
+
+// -- Signature Gradient (Orange → Purple) -------------------------------------
+// Use for: Primary CTAs, progress bars, 2px top-border on "Featured" cards.
+// DO NOT use for more than 2 elements per screen.
+$gradient-from:            #fc9d23;   // secondary_container (orange)
+$gradient-to:              #7d3693;   // primary_container (purple)
+
+// -- Secondary / Accent -------------------------------------------------------
+$secondary-container:      #fc9d23;   // Orange accent
+$secondary-fixed:          #ffdcbd;   // Soft wash for highlight sections
+
+// -- On-surface (text) --------------------------------------------------------
+$on-surface:               #1b1b1c;   // Primary text — NEVER use pure #000
+$on-surface-variant:       #4e4546;   // Secondary/muted text
+
+// -- Navigation / Hero (Dark Core) --------------------------------------------
+$inverse-surface:          #303031;   // Nav bar + Hero backgrounds
+$inverse-on-surface:       #f3f0f1;   // Text/icons over dark surfaces
+
+// -- States -------------------------------------------------------------------
+$error:                    #ba1a1a;
+$error-container:          #ffdad6;
+$on-error:                 #ffffff;
+
+// -- Borders ------------------------------------------------------------------
+// "Ghost Border" fallback only — never use as structural dividers.
+$outline-variant:          #d1c2d0;   // Use at 15% opacity max
+
+// -----------------------------------------------------------------------------
+// SHADOWS & ELEVATION
+// Convey depth via tonal layering first. Shadows only for floating elements.
+// -----------------------------------------------------------------------------
+
+$shadow-ambient:           0px 12px 32px rgba(#1b1b1c, 0.06);  // Modals / popovers
+$shadow-card:              0px 4px 16px rgba(#1b1b1c, 0.04);   // Subtle card lift (use sparingly)
+
+// -----------------------------------------------------------------------------
+// BORDER RADIUS
+// Tight, structured feel — no pill shapes in enterprise UI.
+// -----------------------------------------------------------------------------
+
+$radius-sm:   2px;    // Micro elements (tags, badges)
+$radius-md:   4px;    // Default — small components (inputs, buttons)
+$radius-lg:   8px;    // Cards and containers
+$radius-xl:   12px;   // Large panels, modals
+
+// -----------------------------------------------------------------------------
+// SPACING — 8px Base Grid
+// Derived from the modular scale referenced in the design doc.
+// Use these tokens; avoid magic numbers in components.
+// -----------------------------------------------------------------------------
+
+$space-1:     4px;    // xs  — icon gap, tight padding
+$space-2:     8px;    // sm  — inner padding
+$space-3:     12px;   // md- — compact elements
+$space-4:     16px;   // md  — standard padding
+$space-5:     20px;   // md+ — form fields
+$space-6:     24px;   // lg  — card padding, section sub-spacing (spacing-xl in design doc)
+$space-8:     32px;   // xl  — section padding
+$space-10:    40px;   // 2xl
+$space-12:    48px;   // 3xl — section vertical gap
+$space-16:    64px;   // 4xl
+$space-20:    80px;   // 5xl — hero padding
+$space-24:    96px;   // 6xl
+$space-32:    128px;  // 7xl — max section gap
+
+// -----------------------------------------------------------------------------
+// TYPOGRAPHY SCALE
+// Tri-font system: Inter (decisions) · Work Sans (context) · Plus Jakarta Sans (UI)
+// -----------------------------------------------------------------------------
+
+// Font families
+$font-display:   'Inter', system-ui, sans-serif;
+$font-body:      'Work Sans', system-ui, sans-serif;
+$font-label:     'Plus Jakarta Sans', system-ui, sans-serif;
+
+// Type scale
+$type-display-lg-size:   3.5rem;     // 56px — Hero headlines
+$type-display-lg-weight: 700;
+$type-display-lg-line:   1.1;
+
+$type-display-md-size:   2.75rem;    // 44px — Section headlines
+$type-display-md-weight: 700;
+$type-display-md-line:   1.15;
+
+$type-headline-md-size:  1.75rem;    // 28px — Sub-section headers
+$type-headline-md-weight: 600;
+$type-headline-md-line:  1.3;
+
+$type-headline-sm-size:  1.375rem;   // 22px — Card headers
+$type-headline-sm-weight: 600;
+$type-headline-sm-line:  1.35;
+
+$type-title-lg-size:     1.375rem;   // 22px — Work Sans (softer)
+$type-title-lg-weight:   500;
+$type-title-lg-line:     1.4;
+
+$type-title-md-size:     1.125rem;   // 18px
+$type-title-md-weight:   500;
+$type-title-md-line:     1.45;
+
+$type-body-md-size:      0.875rem;   // 14px — Body text
+$type-body-md-weight:    400;
+$type-body-md-line:      1.6;
+
+$type-body-lg-size:      1rem;       // 16px — Larger body
+$type-body-lg-weight:    400;
+$type-body-lg-line:      1.6;
+
+$type-label-md-size:     0.75rem;    // 12px — Plus Jakarta (UI controls)
+$type-label-md-weight:   500;
+$type-label-md-line:     1.4;
+
+$type-label-lg-size:     0.875rem;   // 14px — Larger labels
+$type-label-lg-weight:   500;
+$type-label-lg-line:     1.4;
+
+// -----------------------------------------------------------------------------
+// BREAKPOINTS
+// Desktop-first as specified in the design doc.
+// -----------------------------------------------------------------------------
+
+$bp-xl:  1440px;
+$bp-lg:  1280px;
+$bp-md:  1024px;
+$bp-sm:  768px;
+$bp-xs:  480px;
+
+// -----------------------------------------------------------------------------
+// CSS CUSTOM PROPERTIES MAP
+// Called once in styles.scss via the tokens-to-css() output below.
+// This mixin writes all tokens as CSS variables onto :root.
+// -----------------------------------------------------------------------------
+
+@mixin define-css-properties() {
+  // Colors
+  --color-surface:                  #{$surface};
+  --color-surface-container-low:    #{$surface-container-low};
+  --color-surface-container:        #{$surface-container};
+  --color-surface-container-high:   #{$surface-container-high};
+  --color-surface-container-highest:#{$surface-container-highest};
+  --color-surface-container-lowest: #{$surface-container-lowest};
+
+  --color-primary:                  #{$primary};
+  --color-primary-container:        #{$primary-container};
+  --color-on-primary:               #{$on-primary};
+
+  --color-gradient-from:            #{$gradient-from};
+  --color-gradient-to:              #{$gradient-to};
+
+  --color-secondary-container:      #{$secondary-container};
+  --color-secondary-fixed:          #{$secondary-fixed};
+
+  --color-on-surface:               #{$on-surface};
+  --color-on-surface-variant:       #{$on-surface-variant};
+
+  --color-inverse-surface:          #{$inverse-surface};
+  --color-inverse-on-surface:       #{$inverse-on-surface};
+
+  --color-error:                    #{$error};
+  --color-error-container:          #{$error-container};
+  --color-on-error:                 #{$on-error};
+
+  --color-outline-variant:          #{$outline-variant};
+
+  // Shadows
+  --shadow-ambient:                 #{$shadow-ambient};
+  --shadow-card:                    #{$shadow-card};
+
+  // Radius
+  --radius-sm:  #{$radius-sm};
+  --radius-md:  #{$radius-md};
+  --radius-lg:  #{$radius-lg};
+  --radius-xl:  #{$radius-xl};
+
+  // Spacing
+  --space-1:    #{$space-1};
+  --space-2:    #{$space-2};
+  --space-3:    #{$space-3};
+  --space-4:    #{$space-4};
+  --space-5:    #{$space-5};
+  --space-6:    #{$space-6};
+  --space-8:    #{$space-8};
+  --space-10:   #{$space-10};
+  --space-12:   #{$space-12};
+  --space-16:   #{$space-16};
+  --space-20:   #{$space-20};
+  --space-24:   #{$space-24};
+  --space-32:   #{$space-32};
+
+  // Typography
+  --font-display: #{$font-display};
+  --font-body:    #{$font-body};
+  --font-label:   #{$font-label};
+}

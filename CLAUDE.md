@@ -41,8 +41,12 @@ npx vitest run src/app/app.spec.ts
 - **Forms:** Reactive forms, not template-driven.
 
 ### Styling
-- Global styles: `src/styles.scss`
-- Per-component SCSS with paths relative to the component `.ts` file.
+- Global styles: `src/styles.scss` — imports tokens, reset, typography.
+- Design tokens (SCSS variables + CSS custom properties): `src/styles/_tokens.scss`
+- Mixins (responsive, gradient, glass, elevation, type scale): `src/styles/_mixins.scss`
+- **In every component SCSS file:** `@use 'index' as *;` — gives access to all tokens and mixins.
+- `includePaths` is set to `src/styles` in `angular.json`, so `'index'` resolves to `src/styles/_index.scss`.
+- CSS custom properties (`var(--color-primary)`, `var(--space-6)`, etc.) are globally available without `@use`.
 - No `ngClass`/`ngStyle` — use `[class.foo]` and `[style.foo]` bindings.
 
 ### Testing

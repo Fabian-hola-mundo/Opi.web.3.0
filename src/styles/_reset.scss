@@ -1,0 +1,107 @@
+// =============================================================================
+// BASE RESET — OpiWeb 2026
+// =============================================================================
+
+@use 'tokens' as t;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+
+  // Prevent layout shift from scrollbar appearing
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: t.$font-body;
+  font-size: t.$type-body-md-size;
+  font-weight: t.$type-body-md-weight;
+  line-height: t.$type-body-md-line;
+  color: t.$on-surface;
+  background-color: t.$surface;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+// Headings — Inter by default, overridden per context via type mixin
+h1, h2, h3, h4, h5, h6 {
+  font-family: t.$font-display;
+  font-weight: 700;
+  color: t.$on-surface;
+  // No margins — spacing handled by layout context
+}
+
+// Paragraphs
+p {
+  font-family: t.$font-body;
+  color: t.$on-surface;
+}
+
+// Links — no default underline; components handle interaction states
+a {
+  color: t.$primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Media — prevent overflow
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Lists — reset; components apply their own styles
+ul,
+ol {
+  list-style: none;
+}
+
+// Buttons — normalize across browsers
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+// Inputs — normalize
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+// Focus visible — accessibility
+:focus-visible {
+  outline: 2px solid t.$primary;
+  outline-offset: 3px;
+  border-radius: t.$radius-md;
+}
+
+// Hidden utility
+[hidden] {
+  display: none !important;
+}

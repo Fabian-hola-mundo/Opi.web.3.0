@@ -1,0 +1,130 @@
+@use 'index' as *;
+
+// =============================================================================
+// WHATSAPP FLOAT — Botón flotante de contacto
+// Glassmorphism circle with brand gradient, hover micro-interaction
+// =============================================================================
+
+$btn-size: 56px;
+$label-offset: calc(#{$btn-size} + #{$space-3});
+$z-float: 900; // above all sections, below modals
+
+// -----------------------------------------------------------------------------
+// ANCHOR — the floating button
+// -----------------------------------------------------------------------------
+
+.wa-float {
+  // Fixed positioning — always visible while scrolled past Hero
+  position: fixed;
+  bottom: $space-8;    // 32px from viewport bottom
+  right: $space-8;     // 32px from viewport right
+  z-index: $z-float;
+
+  // Circle dimensions
+  width: $btn-size;
+  height: $btn-size;
+  border-radius: 50%;
+
+  // Brand gradient fill
+  background: linear-gradient(135deg, $gradient-from 0%, $gradient-to 100%);
+
+  // Glassmorphism layer on top of gradient
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22),  // inner glass border
+    0 4px 16px rgba(0, 0, 0, 0.18),              // ambient shadow
+    0 8px 32px rgba($gradient-to, 0.35);          // brand-colored glow
+
+  // Icon alignment
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Entrance / exit animation state
+  opacity: 0;
+  transform: scale(0.7) translateY(12px);
+  pointer-events: none;
+  transition:
+    opacity 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  // Visible state (toggled by Signal → class binding)
+  &.is-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+  }
+
+  // Hover micro-interaction — lift + intensify glow
+  &:hover {
+    transform: scale(1) translateY(-4px);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.32),
+      0 8px 24px rgba(0, 0, 0, 0.22),
+      0 16px 48px rgba($gradient-to, 0.5);
+  }
+
+  // Focus — keyboard accessible
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.32),
+      0 0 0 3px $surface,
+      0 0 0 5px $gradient-to;
+  }
+
+  // Active — subtle press feedback
+  &:active {
+    transform: scale(0.96) translateY(0);
+    transition-duration: 80ms;
+  }
+
+  @include respond-to(sm) {
+    bottom: $space-5;
+    right: $space-5;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// ICON
+// -----------------------------------------------------------------------------
+
+.wa-float__icon {
+  width: 26px;
+  height: 26px;
+  color: #ffffff;
+  flex-shrink: 0;
+  // Drop shadow on icon for extra legibility over lighter areas
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+// -----------------------------------------------------------------------------
+// TOOLTIP LABEL — slides in from right on hover
+// -----------------------------------------------------------------------------
+
+.wa-float__label {
+  @include type(label-sm);
+  position: absolute;
+  right: $label-offset;
+  white-space: nowrap;
+  color: $on-surface;
+  background: $surface-container-lowest;
+  border: 1px solid rgba($on-surface, 0.08);
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+
+  // Hidden by default
+  opacity: 0;
+  transform: translateX(6px);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+
+  // Reveal on parent hover / focus
+  .wa-float:hover &,
+  .wa-float:focus-visible & {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

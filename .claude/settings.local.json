@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); styles=d['projects']['Opi.web.3.0']['architect']['build']['options'].get\\('styles',[]\\); print\\('styles:', styles\\)\")",
+      "Bash(npm run:*)",
+      "Bash(npm start:*)"
+    ]
+  }
+}

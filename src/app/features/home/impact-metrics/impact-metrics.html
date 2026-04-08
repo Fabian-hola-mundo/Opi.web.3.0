@@ -1,0 +1,47 @@
+<section class="impact-metrics" id="impacto" aria-labelledby="metrics-heading">
+  <div class="container">
+
+    <!-- Header -->
+    <header class="metrics-header">
+      <p class="metrics-eyebrow">Resultados que hablan</p>
+      <h2 class="metrics-heading" id="metrics-heading">
+        Números que no se inventan,
+        <em class="metrics-heading__accent">se certifican.</em>
+      </h2>
+    </header>
+
+    <!-- Bento Grid -->
+    <div class="metrics-grid" role="list" aria-label="Métricas de impacto">
+
+      @for (metric of metrics; track metric.id) {
+        <article class="metric-card metric-card--{{ metric.variant }}"
+                 [attr.style]="'grid-area: ' + metric.gridArea"
+                 role="listitem">
+
+          @if (metric.variant === 'narrative') {
+            <!-- NARRATIVE CARD — no number, text-focused -->
+            <div class="metric-card__narrative">
+              <span class="metric-card__narrative-icon" aria-hidden="true">◈</span>
+              <h3 class="metric-card__narrative-title">{{ metric.label }}</h3>
+              <p class="metric-card__narrative-body">{{ metric.description }}</p>
+            </div>
+
+          } @else {
+            <!-- NUMERIC CARD — count-up display -->
+            <div class="metric-card__content">
+              <p class="metric-card__value"
+                 [attr.aria-label]="metric.label + ': ' + displayValues()[metric.id]">
+                {{ displayValues()[metric.id] }}
+              </p>
+              <p class="metric-card__label">{{ metric.label }}</p>
+              <p class="metric-card__desc">{{ metric.description }}</p>
+            </div>
+          }
+
+        </article>
+      }
+
+    </div>
+
+  </div>
+</section>

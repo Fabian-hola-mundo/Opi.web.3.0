@@ -1,0 +1,296 @@
+@use 'index' as *;
+
+// =============================================================================
+// NAVBAR — OpiWeb 2026
+// Dark Core: inverse-surface (#303031) anchor at top.
+// On scroll (>80px): transitions to glassmorphism.
+// =============================================================================
+
+$nav-height: 72px;
+$transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// Host element wraps both the bar and the mobile menu
+:host {
+  display: block;
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 100;
+}
+
+// -----------------------------------------------------------------------------
+// NAV BAR
+// -----------------------------------------------------------------------------
+
+.nav-bar {
+  height: $nav-height;
+  background-color: $inverse-surface;
+  transition:
+    background-color $transition,
+    backdrop-filter $transition;
+
+  // On scroll: glassmorphism
+  &.is-scrolled {
+    @include glass($bg: $inverse-surface, $opacity: 0.85, $blur: 20px);
+    border-bottom: 1px solid rgba($inverse-on-surface, 0.08);
+  }
+}
+
+.nav-inner {
+  @include container;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: $space-8;
+}
+
+// -----------------------------------------------------------------------------
+// LOGO
+// -----------------------------------------------------------------------------
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  text-decoration: none;
+  flex-shrink: 0;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline-color: $inverse-on-surface;
+  }
+}
+
+.nav-logo__text {
+  font-family: $font-display;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: $inverse-on-surface;
+  line-height: 1;
+}
+
+.nav-logo__dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-bottom: 12px; // superscript position
+  @include gradient-signature;
+}
+
+// -----------------------------------------------------------------------------
+// DESKTOP NAV LINKS
+// -----------------------------------------------------------------------------
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+  margin-inline-start: auto; // push to the right
+}
+
+.nav-link {
+  @include type(label-lg);
+  color: rgba($inverse-on-surface, 0.7);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color $transition;
+  white-space: nowrap;
+  position: relative;
+
+  // Underline indicator
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: -4px;
+    height: 2px;
+    background: linear-gradient(90deg, $gradient-from, $gradient-to);
+    transform: scaleX(0);
+    transition: transform $transition;
+    transform-origin: left;
+  }
+
+  &:hover,
+  &.nav-link--active {
+    color: $inverse-on-surface;
+    text-decoration: none;
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &:focus-visible {
+    outline-color: $inverse-on-surface;
+    border-radius: $radius-md;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// CTA BUTTON
+// -----------------------------------------------------------------------------
+
+.nav-cta {
+  @include type(label-lg);
+  @include gradient-signature;
+  color: $on-primary;
+  text-decoration: none;
+  padding: $space-2 $space-5;
+  border-radius: $radius-md;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity $transition, transform $transition;
+
+  &:hover {
+    text-decoration: none;
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $gradient-from;
+    outline-offset: 3px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// MOBILE TOGGLE (hamburger)
+// -----------------------------------------------------------------------------
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: $space-2;
+  border-radius: $radius-md;
+  margin-inline-start: auto;
+  transition: background-color $transition;
+
+  &:hover {
+    background-color: rgba($inverse-on-surface, 0.08);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $inverse-on-surface;
+    outline-offset: 2px;
+  }
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: $inverse-on-surface;
+  border-radius: 2px;
+  transition: transform $transition, opacity $transition;
+}
+
+// Animate bars when open
+:host(.is-open) .nav-toggle__bar {
+  &:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  &:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  &:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+// -----------------------------------------------------------------------------
+// MOBILE MENU
+// -----------------------------------------------------------------------------
+
+.mobile-menu {
+  position: fixed;
+  top: $nav-height;
+  inset-inline: 0;
+  background-color: $inverse-surface;
+  padding: $space-4 $space-4 $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform $transition, opacity $transition;
+  z-index: 99;
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+  }
+}
+
+.mobile-menu__link {
+  @include type(title-md);
+  color: rgba($inverse-on-surface, 0.8);
+  text-decoration: none;
+  padding: $space-3 $space-4;
+  border-radius: $radius-lg;
+  transition: color $transition, background-color $transition;
+
+  &:hover {
+    color: $inverse-on-surface;
+    background-color: rgba($inverse-on-surface, 0.08);
+    text-decoration: none;
+  }
+}
+
+.mobile-menu__cta {
+  @include gradient-signature;
+  @include type(label-lg);
+  color: $on-primary;
+  text-decoration: none;
+  padding: $space-3 $space-4;
+  border-radius: $radius-md;
+  text-align: center;
+  margin-top: $space-4;
+
+  &:hover {
+    text-decoration: none;
+    opacity: 0.9;
+  }
+}
+
+// Open state
+:host(.is-open) .mobile-menu {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+// Overlay
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(#000, 0.4);
+  z-index: 98;
+  top: $nav-height;
+}
+
+// -----------------------------------------------------------------------------
+// RESPONSIVE — hide desktop links, show toggle
+// -----------------------------------------------------------------------------
+
+@include respond-to(md) {
+  .nav-links {
+    display: none;
+  }
+
+  .nav-cta {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+}

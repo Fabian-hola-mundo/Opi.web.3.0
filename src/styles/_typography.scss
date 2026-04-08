@@ -1,0 +1,102 @@
+// =============================================================================
+// TYPOGRAPHY — OpiWeb 2026
+// Tri-font system: Inter · Work Sans · Plus Jakarta Sans
+// =============================================================================
+
+@use 'tokens' as t;
+
+// -----------------------------------------------------------------------------
+// TYPE SCALE UTILITY CLASSES
+// Use these directly in HTML when a component doesn't need SCSS customization.
+// For SCSS component files, use the type() mixin from _mixins.scss instead.
+// -----------------------------------------------------------------------------
+
+.display-lg {
+  font-family: t.$font-display;
+  font-size: t.$type-display-lg-size;
+  font-weight: t.$type-display-lg-weight;
+  line-height: t.$type-display-lg-line;
+  letter-spacing: -0.02em;
+  color: t.$on-surface;
+}
+
+.display-md {
+  font-family: t.$font-display;
+  font-size: t.$type-display-md-size;
+  font-weight: t.$type-display-md-weight;
+  line-height: t.$type-display-md-line;
+  letter-spacing: -0.015em;
+  color: t.$on-surface;
+}
+
+.headline-md {
+  font-family: t.$font-display;
+  font-size: t.$type-headline-md-size;
+  font-weight: t.$type-headline-md-weight;
+  line-height: t.$type-headline-md-line;
+  letter-spacing: -0.01em;
+  color: t.$on-surface;
+}
+
+.headline-sm {
+  font-family: t.$font-display;
+  font-size: t.$type-headline-sm-size;
+  font-weight: t.$type-headline-sm-weight;
+  line-height: t.$type-headline-sm-line;
+  color: t.$on-surface;
+}
+
+.title-lg {
+  font-family: t.$font-body;
+  font-size: t.$type-title-lg-size;
+  font-weight: t.$type-title-lg-weight;
+  line-height: t.$type-title-lg-line;
+  color: t.$on-surface;
+}
+
+.title-md {
+  font-family: t.$font-body;
+  font-size: t.$type-title-md-size;
+  font-weight: t.$type-title-md-weight;
+  line-height: t.$type-title-md-line;
+  color: t.$on-surface;
+}
+
+.body-lg {
+  font-family: t.$font-body;
+  font-size: t.$type-body-lg-size;
+  font-weight: t.$type-body-lg-weight;
+  line-height: t.$type-body-lg-line;
+  color: t.$on-surface;
+}
+
+.body-md {
+  font-family: t.$font-body;
+  font-size: t.$type-body-md-size;
+  font-weight: t.$type-body-md-weight;
+  line-height: t.$type-body-md-line;
+  color: t.$on-surface;
+}
+
+.label-lg {
+  font-family: t.$font-label;
+  font-size: t.$type-label-lg-size;
+  font-weight: t.$type-label-lg-weight;
+  line-height: t.$type-label-lg-line;
+  letter-spacing: 0.01em;
+}
+
+.label-md {
+  font-family: t.$font-label;
+  font-size: t.$type-label-md-size;
+  font-weight: t.$type-label-md-weight;
+  line-height: t.$type-label-md-line;
+  letter-spacing: 0.015em;
+}
+
+// -- Color modifiers ----------------------------------------------------------
+
+.text-primary          { color: t.$primary; }
+.text-on-surface       { color: t.$on-surface; }
+.text-on-surface-muted { color: t.$on-surface-variant; }
+.text-inverse          { color: t.$inverse-on-surface; }

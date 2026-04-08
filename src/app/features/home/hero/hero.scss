@@ -1,0 +1,244 @@
+@use 'index' as *;
+
+// =============================================================================
+// HERO — OpiWeb 2026
+// Dark anchor. Full-viewport. Staggered CSS entrance animations.
+// =============================================================================
+
+$hero-transition: cubic-bezier(0.16, 1, 0.3, 1);
+
+// Entrance keyframe
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// SECTION
+// -----------------------------------------------------------------------------
+
+:host {
+  display: block;
+  background-color: $inverse-surface;
+  position: relative;
+  overflow: hidden;
+}
+
+// Subtle gradient blob — decorative, aria-hidden via SCSS-only pseudo
+:host::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 55%;
+  aspect-ratio: 1;
+  background: radial-gradient(
+    ellipse at center,
+    rgba($gradient-to, 0.18) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+// -----------------------------------------------------------------------------
+// HERO BODY (text + CTAs)
+// -----------------------------------------------------------------------------
+
+.hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: $space-24 $space-12;
+
+  @include respond-to(sm) {
+    padding-block: $space-16 $space-8;
+  }
+}
+
+// Eyebrow
+.hero-eyebrow {
+  @include type(label-lg);
+  color: rgba($inverse-on-surface, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: $space-5;
+  animation: fade-up 600ms $hero-transition both;
+  animation-delay: 50ms;
+}
+
+// Headline
+.hero-headline {
+  font-family: $font-display;
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: $inverse-on-surface;
+  max-width: 14ch;
+  margin-bottom: $space-6;
+  animation: fade-up 700ms $hero-transition both;
+  animation-delay: 120ms;
+
+  em {
+    font-style: normal;
+    @include gradient-signature(text);
+  }
+}
+
+// Sub-copy
+.hero-sub {
+  @include type(title-md);
+  color: rgba($inverse-on-surface, 0.6);
+  max-width: 46ch;
+  margin-bottom: $space-10;
+  line-height: 1.65;
+  animation: fade-up 700ms $hero-transition both;
+  animation-delay: 220ms;
+
+  @include respond-to(sm) {
+    @include type(body-lg);
+    color: rgba($inverse-on-surface, 0.6);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// CTAs
+// -----------------------------------------------------------------------------
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  flex-wrap: wrap;
+  animation: fade-up 700ms $hero-transition both;
+  animation-delay: 320ms;
+}
+
+.btn-primary {
+  @include type(label-lg);
+  @include gradient-signature;
+  color: $on-primary;
+  text-decoration: none;
+  padding: $space-3 $space-8;
+  border-radius: $radius-md;
+  white-space: nowrap;
+  transition: opacity 200ms ease, transform 200ms ease;
+
+  &:hover {
+    text-decoration: none;
+    opacity: 0.88;
+    transform: translateY(-2px);
+  }
+
+  &:active { transform: translateY(0); }
+
+  &:focus-visible {
+    outline: 2px solid $gradient-from;
+    outline-offset: 3px;
+  }
+}
+
+.btn-secondary {
+  @include type(label-lg);
+  color: rgba($inverse-on-surface, 0.75);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  transition: color 200ms ease, gap 200ms ease;
+
+  &:hover {
+    color: $inverse-on-surface;
+    text-decoration: none;
+    gap: $space-3;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $inverse-on-surface;
+    outline-offset: 3px;
+    border-radius: $radius-sm;
+  }
+}
+
+.btn-secondary__arrow {
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+
+.btn-secondary:hover .btn-secondary__arrow {
+  transform: translateX(4px);
+}
+
+// -----------------------------------------------------------------------------
+// METRICS STRIP
+// -----------------------------------------------------------------------------
+
+.hero-metrics {
+  border-top: 1px solid rgba($inverse-on-surface, 0.08);
+  padding-block: $space-8;
+  animation: fade-up 700ms $hero-transition both;
+  animation-delay: 480ms;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-4;
+
+  @include respond-to(sm) {
+    grid-template-columns: 1fr;
+    gap: $space-3;
+  }
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  padding: $space-5 $space-6;
+  background-color: rgba($inverse-on-surface, 0.04);
+  border: 1px solid rgba($inverse-on-surface, 0.07);
+  border-radius: $radius-lg;
+
+  @include respond-to(sm) {
+    flex-direction: row;
+    align-items: center;
+    gap: $space-4;
+  }
+}
+
+.metric-card__value {
+  font-family: $font-display;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: $secondary-container; // orange #fc9d23 — brand accent
+
+  @include respond-to(sm) {
+    font-size: 1.75rem;
+  }
+}
+
+.metric-card__unit {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-inline-start: 2px;
+}
+
+.metric-card__label {
+  @include type(label-md);
+  color: rgba($inverse-on-surface, 0.5);
+}
