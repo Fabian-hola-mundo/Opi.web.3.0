@@ -1,42 +1,64 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { OpiAccordionItemComponent } from '../../../shared/components/opi-accordion-item/opi-accordion-item.component';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { OpiSectionWrapperComponent } from '../../../shared/components/opi-section-wrapper/opi-section-wrapper.component';
 
-const cases = [
+interface SuccessCase {
+  tag: string;
+  title: string;
+  challenge?: string;
+  result?: string;
+  metric: string;
+  metricLabel: string;
+  client?: string;
+  description?: string;
+}
+
+const successCases: SuccessCase[] = [
   {
-    title: 'Retailer Nacional — Transformación Digital',
-    content:
-      'Reto: Sistema de inventario heredado causaba pérdidas de $2M anuales por desabasto. Resultado: Implementamos plataforma de gestión en tiempo real, reduciendo pérdidas en 78% en 6 meses y mejorando la rotación de inventario un 34%.',
+    tag: 'Retail',
+    title: 'Transformación Digital Retailer Nacional',
+    challenge: 'Sistema de inventario heredado causaba pérdidas de $2M anuales por desabasto.',
+    result: 'Plataforma en tiempo real redujo pérdidas 78% y mejoró rotación de inventario 34% en 6 meses.',
+    metric: '-78%',
+    metricLabel: 'Pérdidas Operativas',
   },
   {
-    title: 'Firma Financiera — Automatización de Procesos',
-    content:
-      'Reto: 40% del tiempo operativo se invertía en tareas manuales de conciliación. Resultado: RPA + integración de sistemas redujo el tiempo de conciliación de 3 días a 4 horas, liberando al equipo para trabajo de mayor valor.',
+    tag: 'Fintech',
+    title: 'Automatización de Conciliación Financiera',
+    client: 'Firma Financiera Líder',
+    challenge: '40% del tiempo operativo invertido en tareas manuales de conciliación.',
+    metric: '-92%',
+    metricLabel: 'Tiempo de Conciliación',
   },
   {
-    title: 'Constructora — Visibilidad de Proyectos',
-    content:
-      'Reto: 12 proyectos simultáneos sin visibilidad unificada del avance y costos. Resultado: Dashboard ejecutivo en tiempo real con alertas proactivas, logrando 95% de proyectos entregados a tiempo vs 60% previo.',
+    tag: 'Construcción',
+    title: 'Visibilidad Unificada de Proyectos',
+    description: 'Dashboard ejecutivo en tiempo real con alertas proactivas para 12 proyectos simultáneos.',
+    metric: '95%',
+    metricLabel: 'Proyectos a Tiempo',
   },
   {
-    title: 'Cadena Hotelera — Experiencia Digital',
-    content:
-      'Reto: Procesos de check-in/check-out tomaban 18 minutos promedio, generando quejas de huéspedes. Resultado: App móvil + integración con PMS redujo tiempo a 3 minutos y aumentó NPS un 24 puntos.',
+    tag: 'Hospitalidad Digital',
+    title: 'Experiencia Digital Hotelera',
+    metric: '3 min',
+    metricLabel: 'Check-in Promedio',
+  },
+  {
+    tag: 'Cadena Hotelera Premium',
+    title: 'App Móvil + Integración PMS',
+    client: 'Cadena Hotelera Internacional',
+    result: 'Reducción de check-in de 18 a 3 minutos en 60+ propiedades',
+    metric: '+24',
+    metricLabel: 'Puntos NPS',
   },
 ];
 
 @Component({
   selector: 'app-bridge',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [OpiSectionWrapperComponent, OpiAccordionItemComponent],
+  imports: [OpiSectionWrapperComponent],
   templateUrl: './bridge.component.html',
   styleUrl: './bridge.component.scss',
 })
 export class BridgeComponent {
-  readonly cases = cases;
-  readonly openIndex = signal<number | null>(null);
-
-  setOpen(i: number): void {
-    this.openIndex.set(this.openIndex() === i ? null : i);
-  }
+  readonly cases = successCases;
 }
