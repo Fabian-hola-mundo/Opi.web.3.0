@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+// OPI Technology — Global Styles
+// Import order matters: tokens first, then dependent files
+
+@use 'app/core/shared/styles/tokens' as *;
+@use 'app/core/shared/styles/typography';
+@use 'app/core/shared/styles/animations';
+
+// === RESETS ===
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark light;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+// Focus ring
+:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+// Scrollbar (dark surfaces)
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-surface-low); }
+::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: var(--radius-full); }
+
+// Container utility
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--section-px);
+}
+
+// Screen-reader only
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}

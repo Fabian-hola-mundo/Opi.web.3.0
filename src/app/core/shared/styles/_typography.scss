@@ -1,0 +1,45 @@
+// OPI Typography — Inter font loaded via Google Fonts in index.html
+// This file applies the type scale globally
+
+@use 'tokens' as *;
+
+html {
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.display-lg {
+  font-size: var(--font-display-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--lh-heading);
+  letter-spacing: -0.02em;
+}
+
+.display-md {
+  font-size: var(--font-display-md);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--lh-heading);
+  letter-spacing: -0.015em;
+}
+
+.display-sm {
+  font-size: var(--font-display-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--lh-tight);
+}
+
+.body-lg { font-size: var(--font-body-lg); line-height: var(--lh-body); }
+.body-md { font-size: var(--font-body-md); line-height: var(--lh-body); }
+.body-sm { font-size: var(--font-body-sm); line-height: var(--lh-body); }
+.label   { font-size: var(--font-label); line-height: 1.4; letter-spacing: 0.02em; }
+
+// Gradient text utility
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
