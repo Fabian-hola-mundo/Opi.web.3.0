@@ -6,10 +6,10 @@
     @for (point of painPoints; track point.title; let i = $index) {
       <div appInView class="fade-in-up" [class.stagger-1]="i === 0" [class.stagger-2]="i === 1" [class.stagger-3]="i === 2">
         <opi-card
-          [icon]="point.icon"
+          [sceneType]="point.sceneType"
+          [category]="point.category"
           [title]="point.title"
           [body]="point.body"
-          accentColor="var(--color-secondary)"
         />
       </div>
     }

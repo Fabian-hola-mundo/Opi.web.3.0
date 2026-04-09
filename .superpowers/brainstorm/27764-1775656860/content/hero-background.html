@@ -1,0 +1,125 @@
+<h2>Hero Background — ¿Cuál dirección visual?</h2>
+<p class="subtitle">Basado en tu moodboard (OpenAI · Accenture · Anthropic). Elige la que mejor proyecta "autoridad enterprise".</p>
+
+<div class="cards">
+
+  <!-- OPCIÓN A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:180px;overflow:hidden;border-radius:6px;position:relative;">
+      <canvas id="canvas-a" style="width:100%;height:100%;display:block;"></canvas>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:16px;">
+        <div style="font-size:22px;font-weight:800;color:#fff;line-height:1.1;text-shadow:0 2px 8px rgba(0,0,0,0.4)">OPI Technology</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.7);margin-top:4px">El puente entre sector público y privado</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A · Fluid Shader Gradient (Three.js)</h3>
+      <p>Gradiente orgánico animado naranja→morado, fluido y en movimiento constante. Como OpenAI. Máximo impacto visual. Requiere WebGL + fallback SSR en CSS.</p>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+        <span style="background:#303031;color:#fc9d23;padding:3px 8px;border-radius:4px;font-size:10px">Three.js</span>
+        <span style="background:#303031;color:#f3f0f1;padding:3px 8px;border-radius:4px;font-size:10px">GLSL Shader</span>
+        <span style="background:#303031;color:#f3f0f1;padding:3px 8px;border-radius:4px;font-size:10px">CSS Fallback SSR</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPCIÓN B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:180px;overflow:hidden;border-radius:6px;position:relative;background:#0d0d0e;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 50%,rgba(125,54,147,0.35) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 80% 30%,rgba(252,157,35,0.2) 0%,transparent 60%)"></div>
+      <!-- Simulated mesh/grid -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15" viewBox="0 0 400 180">
+        <defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#7d3693" stroke-width="0.5"/></pattern></defs>
+        <rect width="400" height="180" fill="url(#grid)"/>
+        <circle cx="80" cy="90" r="60" fill="none" stroke="#fc9d23" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="320" cy="60" r="40" fill="none" stroke="#7d3693" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:16px;">
+        <div style="font-size:22px;font-weight:800;color:#fff;line-height:1.1">OPI Technology</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px">El puente entre sector público y privado</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B · Dark + Mesh Geométrico (CSS + SVG)</h3>
+      <p>Fondo carbón oscuro (#0d0d0e) con mesh grid sutil y halos de gradiente. Como Anthropic / Accenture. Sin WebGL. 100% SSR-safe. Animación CSS suave.</p>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+        <span style="background:#303031;color:#fc9d23;padding:3px 8px;border-radius:4px;font-size:10px">CSS only</span>
+        <span style="background:#303031;color:#f3f0f1;padding:3px 8px;border-radius:4px;font-size:10px">SSR safe</span>
+        <span style="background:#303031;color:#f3f0f1;padding:3px 8px;border-radius:4px;font-size:10px">Cero deps extra</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPCIÓN C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:180px;overflow:hidden;border-radius:6px;position:relative;background:#0d0d0e;">
+      <!-- Particles simulation -->
+      <div style="position:absolute;inset:0;">
+        <div style="position:absolute;width:3px;height:3px;background:#fc9d23;border-radius:50%;top:30%;left:20%;opacity:0.7;box-shadow:0 0 6px #fc9d23"></div>
+        <div style="position:absolute;width:2px;height:2px;background:#7d3693;border-radius:50%;top:50%;left:40%;opacity:0.6;box-shadow:0 0 4px #7d3693"></div>
+        <div style="position:absolute;width:3px;height:3px;background:#fc9d23;border-radius:50%;top:20%;left:60%;opacity:0.5;box-shadow:0 0 6px #fc9d23"></div>
+        <div style="position:absolute;width:2px;height:2px;background:#7d3693;border-radius:50%;top:65%;left:75%;opacity:0.8;box-shadow:0 0 4px #7d3693"></div>
+        <div style="position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;top:40%;left:85%;opacity:0.4"></div>
+        <div style="position:absolute;width:1px;height:1px;background:#fc9d23;border-radius:50%;top:80%;left:30%;opacity:0.6"></div>
+        <!-- Lines connecting dots -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.2" viewBox="0 0 400 180">
+          <line x1="80" y1="54" x2="160" y2="90" stroke="#7d3693" stroke-width="0.5"/>
+          <line x1="160" y1="90" x2="240" y2="36" stroke="#fc9d23" stroke-width="0.5"/>
+          <line x1="240" y1="36" x2="300" y2="117" stroke="#7d3693" stroke-width="0.5"/>
+          <line x1="80" y1="54" x2="120" y2="108" stroke="#7d3693" stroke-width="0.5"/>
+          <line x1="120" y1="108" x2="160" y2="90" stroke="#fc9d23" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,27,122,0.15),transparent 50%)"></div>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:16px;">
+        <div style="font-size:22px;font-weight:800;color:#fff;line-height:1.1">OPI Technology</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px">El puente entre sector público y privado</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C · Dark + Partículas Conectadas (Three.js ligero)</h3>
+      <p>Fondo oscuro con constelación de partículas naranja/morado interconectadas. Evoca "red de conexiones" y "tecnología". Three.js minimal, sin shaders complejos.</p>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+        <span style="background:#303031;color:#fc9d23;padding:3px 8px;border-radius:4px;font-size:10px">Three.js minimal</span>
+        <span style="background:#303031;color:#f3f0f1;padding:3px 8px;border-radius:4px;font-size:10px">CSS Fallback SSR</span>
+        <span style="background:#303031;color:#f3f0f1;padding:3px 8px;border-radius:4px;font-size:10px">Metáfora visual</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Animate canvas-a with a CSS gradient animation simulation
+const canvas = document.getElementById('canvas-a');
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth || 300;
+  canvas.height = canvas.offsetHeight || 180;
+  let t = 0;
+  function animate() {
+    t += 0.005;
+    const w = canvas.width, h = canvas.height;
+    const grd = ctx.createLinearGradient(
+      w * (0.3 + 0.2 * Math.sin(t)), h * (0.2 + 0.1 * Math.cos(t * 0.7)),
+      w * (0.7 + 0.2 * Math.cos(t * 0.8)), h * (0.8 + 0.1 * Math.sin(t * 0.5))
+    );
+    grd.addColorStop(0, `rgba(252,157,35,${0.8 + 0.2 * Math.sin(t)})`);
+    grd.addColorStop(0.4, `rgba(125,54,147,${0.7 + 0.2 * Math.cos(t)})`);
+    grd.addColorStop(0.7, `rgba(99,27,122,0.9)`);
+    grd.addColorStop(1, `rgba(13,13,14,1)`);
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, w, h);
+    // Add noise-like blobs
+    ctx.save();
+    ctx.globalAlpha = 0.15;
+    ctx.beginPath();
+    ctx.arc(w*(0.3+0.15*Math.sin(t*0.6)), h*(0.5+0.2*Math.cos(t*0.4)), w*0.3, 0, Math.PI*2);
+    ctx.fillStyle = '#fc9d23';
+    ctx.fill();
+    ctx.restore();
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+</script>

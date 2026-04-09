@@ -17,11 +17,11 @@
 
 .social-proof__track {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-6);
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
   padding-inline: var(--section-px);
   padding-block: var(--space-2);
+  align-items: center;
 
   // Hide scrollbar across browsers
   scrollbar-width: none;
@@ -35,35 +35,29 @@
 .social-proof__tile {
   flex-shrink: 0;
   width: 160px;
-  height: 60px;
+  height: 64px;
   border-radius: var(--radius-md);
   background-color: var(--color-surface-high);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  scroll-snap-align: start;
   border: 1px solid rgba(255, 255, 255, 0.06);
   transition: border-color var(--transition-base);
+  padding: var(--space-3);
 
   &:hover {
     border-color: rgba(252, 157, 35, 0.3);
   }
 }
 
-.social-proof__abbrev {
-  font-size: var(--font-display-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-secondary);
-  line-height: 1;
-}
+.social-proof__logo-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
 
-.social-proof__name {
-  font-size: 0.625rem;
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-on-surface);
-  opacity: 0.55;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  img {
+    object-fit: contain;
+    object-position: center;
+    filter: brightness(0.9);
+  }
 }

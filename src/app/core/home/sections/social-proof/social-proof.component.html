@@ -1,19 +1,16 @@
 <section class="social-proof" aria-label="Empresas que confían en OPI Technology">
-  <p class="social-proof__tagline body-sm">Empresas que confían en OPI Technology</p>
+  <p class="social-proof__tagline">Empresas que confían en OPI Technology</p>
   <div
-    #scrollTrack
+    #carousel
     class="social-proof__track"
     role="list"
     aria-label="Logos de clientes"
   >
-    @for (logo of logos; track logo.abbrev) {
-      <div
-        class="social-proof__tile"
-        role="listitem"
-        [attr.aria-label]="logo.label"
-      >
-        <span class="social-proof__abbrev" aria-hidden="true">{{ logo.abbrev }}</span>
-        <span class="social-proof__name">{{ logo.label }}</span>
+    @for (logo of logos; track logo.src) {
+      <div class="social-proof__tile" role="listitem">
+        <div class="social-proof__logo-wrap">
+          <img [ngSrc]="logo.src" [alt]="logo.alt" fill />
+        </div>
       </div>
     }
   </div>

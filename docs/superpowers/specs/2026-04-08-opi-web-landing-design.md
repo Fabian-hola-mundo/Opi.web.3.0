@@ -1,7 +1,7 @@
 # OPI Web 2026 — Landing Page MVP: Design Spec
 
 **Date:** 2026-04-08
-**Author:** Brian (Design Engineer)
+**Author:** Brian & Fabián 
 **Status:** Approved — ready for implementation
 **Version:** 1.0
 

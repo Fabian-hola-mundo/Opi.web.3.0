@@ -6,8 +6,7 @@
   overflow: hidden;
   background:
     radial-gradient(ellipse at 20% 50%, rgba(125, 54, 147, 0.3), transparent 60%),
-    radial-gradient(ellipse at 80% 30%, rgba(252, 157, 35, 0.2), transparent 60%),
-    #0d0d0e;
+    radial-gradient(ellipse at 80% 30%, rgba(252, 157, 35, 0.2), transparent 60%), #0d0d0e;
 }
 
 .hero__canvas {
@@ -31,7 +30,7 @@
 .hero__headline {
   margin-top: var(--space-4);
   margin-bottom: var(--space-6);
-  color: var(--color-inverse-on-surface);
+  color: white;
 }
 
 .hero__subtitle {
