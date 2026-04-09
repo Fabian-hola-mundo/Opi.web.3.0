@@ -6,6 +6,7 @@ import { BridgeComponent } from './sections/bridge/bridge.component';
 import { MetricsComponent } from './sections/metrics/metrics.component';
 import { ContactSectionComponent } from './sections/contact-section/contact-section.component';
 import { ContactFabComponent } from '../shared/components/contact-fab/contact-fab.component';
+import { Header } from '../shared/components/header/header';
 import { ThemeService } from '../../services/theme.service';
 
 @Component({
@@ -18,6 +19,7 @@ import { ThemeService } from '../../services/theme.service';
     MetricsComponent,
     ContactSectionComponent,
     ContactFabComponent,
+    Header
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home.component.html',
