@@ -1,0 +1,20 @@
+<opi-section-wrapper sectionId="metrics" theme="inverse">
+  <header class="metrics-header">
+    <h2 class="display-md">OPI en números</h2>
+    <p class="metrics-subtitle">
+      Métricas que reflejan el impacto tangible de nuestra forma de trabajar.
+    </p>
+  </header>
+
+  <div class="metrics-grid" role="list" aria-label="Métricas de OPI Technology">
+    @for (metric of metrics; track metric.label) {
+      <opi-metric-cell
+        [value]="metric.value"
+        [label]="metric.label"
+        [suffix]="metric.suffix"
+        [span]="metric.span"
+        role="listitem"
+      />
+    }
+  </div>
+</opi-section-wrapper>

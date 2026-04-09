@@ -1,0 +1,21 @@
+<opi-section-wrapper sectionId="bridge" theme="default">
+  <header class="bridge-header">
+    <h2 class="display-md">Casos de Éxito</h2>
+    <p class="bridge-subtitle">
+      Resultados reales de empresas que transformaron sus operaciones con OPI Technology.
+    </p>
+  </header>
+
+  <div class="accordion-list" role="list">
+    @for (case of cases; track case.title; let i = $index) {
+      <div role="listitem">
+        <opi-accordion-item
+          [title]="case.title"
+          [content]="case.content"
+          [isOpen]="openIndex() === i"
+          (toggled)="setOpen(i)"
+        />
+      </div>
+    }
+  </div>
+</opi-section-wrapper>
