@@ -1,0 +1,47 @@
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(125, 54, 147, 0.3), transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(252, 157, 35, 0.2), transparent 60%),
+    #0d0d0e;
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 60%;
+  padding-block: var(--space-32);
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding-block: var(--space-16);
+  }
+}
+
+.hero__headline {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-6);
+  color: var(--color-inverse-on-surface);
+}
+
+.hero__subtitle {
+  color: rgba(243, 240, 241, 0.7);
+  margin-bottom: var(--space-8);
+  max-width: 56ch;
+}
+
+.hero__ctas {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}

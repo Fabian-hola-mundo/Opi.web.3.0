@@ -1,0 +1,17 @@
+<opi-section-wrapper sectionId="pain-block" theme="low">
+  <h2 class="display-md pain-block__heading">
+    ¿Te identificas con alguno de estos desafíos?
+  </h2>
+  <div class="pain-grid">
+    @for (point of painPoints; track point.title; let i = $index) {
+      <div appInView class="fade-in-up" [class.stagger-1]="i === 0" [class.stagger-2]="i === 1" [class.stagger-3]="i === 2">
+        <opi-card
+          [icon]="point.icon"
+          [title]="point.title"
+          [body]="point.body"
+          accentColor="var(--color-secondary)"
+        />
+      </div>
+    }
+  </div>
+</opi-section-wrapper>
