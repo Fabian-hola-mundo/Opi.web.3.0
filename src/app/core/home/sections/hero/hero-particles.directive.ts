@@ -218,6 +218,7 @@ export class HeroParticlesDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (this.animFrameId !== undefined) cancelAnimationFrame(this.animFrameId);
     window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('scroll', this.onScroll);

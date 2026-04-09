@@ -42,7 +42,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       text-decoration: none;
       cursor: pointer;
       border: none;
-      outline: none;
+      outline: transparent;
       transition: all 0.25s ease;
       white-space: nowrap;
 
