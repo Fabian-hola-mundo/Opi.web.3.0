@@ -11,40 +11,52 @@ export interface MetricItem {
 
 const METRICS: MetricItem[] = [
   {
-    value: 15,
+    value: 6,
     suffix: '+',
-    label: 'Años de trayectoria',
-    description: 'Liderando la vanguardia tecnológica desde la primera ola digital.',
+    label: 'Años de ejecución continua',
+    description: 'Construyendo software de misión crítica sin interrupciones desde 2019.',
   },
   {
-    value: 200,
+    value: 20,
     suffix: '+',
-    label: 'Proyectos completados',
-    description: 'Soluciones de misión crítica desplegadas con precisión arquitectónica.',
+    label: 'Proyectos en producción',
+    description: 'Cada uno operando en entornos reales. Cada uno con un cliente que respalda el resultado.',
   },
   {
-    value: 100,
+    value: 90,
     suffix: '%',
-    label: 'Éxito en entrega',
-    description: 'Compromiso inquebrantable con la excelencia técnica y el cumplimiento.',
+    label: 'Tasa de recontratación',
+    description: '9 de cada 10 clientes eligen volver. La confianza no se declara — se demuestra con contratos.',
+  },
+  {
+    value: 10,
+    suffix: '+',
+    label: 'Entidades de alto impacto',
+    description: 'Instituciones públicas que nos confían sus sistemas más sensibles y regulados del país.',
+  },
+  {
+    value: 10,
+    suffix: ' Millones',
+    label: 'De colombianos impactados',
+    description: 'Los sistemas que construimos atienden a ciudadanos que dependen de servicios públicos esenciales.',
   },
   {
     value: 99,
     suffix: '%',
     label: 'Disponibilidad garantizada',
-    description: 'Infraestructura de alta disponibilidad que opera sin interrupciones.',
+    description: 'Sistemas que no se pueden caer, operando con la solidez que exige la misión crítica.',
+  },
+  {
+    value: 100,
+    suffix: '%',
+    label: 'De proyectos entregados',
+    description: 'Sin proyectos abandonados. Sin excusas. Lo que acordamos, lo cumplimos.',
   },
   {
     value: 40,
     suffix: '%',
-    label: 'Reducción de costos',
-    description: 'Eficiencia operativa sostenida, sin sacrificar calidad ni escala.',
-  },
-  {
-    value: 98,
-    suffix: '%',
-    label: 'Clientes satisfechos',
-    description: 'Relaciones de largo plazo construidas sobre resultados concretos.',
+    label: 'De eficiencia operativa',
+    description: 'Optimización real de costos y procesos en los proyectos de nuestros clientes.',
   },
 ];
 

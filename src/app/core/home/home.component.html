@@ -63,6 +63,13 @@
     <div class="section-placeholder" aria-hidden="true" style="min-height: 400px;"></div>
   }
 
+  <!-- FOOTER: defer until viewport -->
+  @defer (on viewport) {
+    <app-footer />
+  } @placeholder {
+    <div class="section-placeholder" aria-hidden="true" style="min-height: 200px;"></div>
+  }
+
   <!-- FAB: always visible -->
   <contact-fab />
 </main>

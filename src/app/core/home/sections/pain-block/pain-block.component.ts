@@ -22,20 +22,20 @@ export class PainBlockComponent {
     {
       sceneType: 'sphere',
       category: 'Ejecución',
-      title: 'Proyectos que no entregan',
-      body: 'El 70% de las transformaciones digitales falla por falta de alineación entre tecnología y negocio. Los proyectos se alargan, los presupuestos se disparan y los resultados no llegan.',
+      title: 'Ingeniería de cumplimiento',
+      body: 'Cerramos la distancia entre sus ideas y la tecnología. Nos aseguramos de que su proyecto cumpla con el presupuesto pactado y se entregue a tiempo, evitando retrasos innecesarios que frenan su crecimiento.',
     },
     {
       sceneType: 'torus',
       category: 'Datos',
-      title: 'Decisiones sin visibilidad',
-      body: 'Información fragmentada en silos hace imposible tomar decisiones basadas en datos. Las áreas no se comunican y los líderes operan con visibilidad parcial.',
+      title: 'Visibilidad total y trazabilidad',
+      body: 'Conectamos todas las piezas de su operación para que nada quede oculto. Convertimos datos dispersos en una visión clara del negocio, permitiéndole tomar decisiones con seguridad y basadas en hechos reales.',
     },
     {
       sceneType: 'knot',
       category: 'Talento',
-      title: 'Tiempo y talento mal invertidos',
-      body: 'Equipos internos gastando recursos en tareas que no generan ventaja competitiva, mientras las oportunidades de mercado pasan de largo.',
+      title: 'Potencial Optimizado',
+      body: 'Liberamos a su equipo de las tareas técnicas que los desgastan. Nosotros nos encargamos de la complejidad tecnológica para que su gente se concentre exclusivamente en generar ventaja competitiva y capturar oportunidades de mercado',
     },
   ];
 }

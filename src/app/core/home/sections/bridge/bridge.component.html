@@ -19,6 +19,9 @@
         <div class="bento-hero__top">
           <span class="bento-tag">{{ cases[0].tag }}</span>
           <h3 class="bento-title bento-title--lg">{{ cases[0].title }}</h3>
+          @if (cases[0].description) {
+            <p class="bento-description">{{ cases[0].description }}</p>
+          }
         </div>
         <div class="bento-hero__bottom">
           <div class="bento-details">
@@ -47,14 +50,17 @@
       <div class="bento-tall__body">
         <span class="bento-tag">{{ cases[1].tag }}</span>
         <h3 class="bento-title bento-title--md">{{ cases[1].title }}</h3>
+        @if (cases[1].description) {
+          <p class="bento-description">{{ cases[1].description }}</p>
+        }
         <div class="bento-details">
-          <div class="bento-detail">
-            <p class="bento-label">Cliente</p>
-            <p class="bento-text">{{ cases[1].client }}</p>
-          </div>
           <div class="bento-detail">
             <p class="bento-label">Reto</p>
             <p class="bento-text">{{ cases[1].challenge }}</p>
+          </div>
+          <div class="bento-detail">
+            <p class="bento-label">Resultado</p>
+            <p class="bento-text">{{ cases[1].result }}</p>
           </div>
         </div>
       </div>
@@ -73,6 +79,24 @@
         <span class="bento-tag bento-tag--accent">{{ cases[2].tag }}</span>
         <h3 class="bento-title bento-title--md">{{ cases[2].title }}</h3>
         <p class="bento-description">{{ cases[2].description }}</p>
+        
+        @if (cases[2].challenge || cases[2].result) {
+          <div class="bento-details">
+            @if (cases[2].challenge) {
+              <div class="bento-detail">
+                <p class="bento-label">Reto</p>
+                <p class="bento-text">{{ cases[2].challenge }}</p>
+              </div>
+            }
+            @if (cases[2].result) {
+              <div class="bento-detail">
+                <p class="bento-label">Resultado</p>
+                <p class="bento-text">{{ cases[2].result }}</p>
+              </div>
+            }
+          </div>
+        }
+
         <div [attr.aria-label]="cases[2].metric + ' ' + cases[2].metricLabel">
           <p class="bento-stat__value bento-stat__value--xl" aria-hidden="true">
             {{ cases[2].metric }}
@@ -82,45 +106,35 @@
       </div>
     </article>
 
-    <!-- Card 4: Wide — col 5–12, row 3 -->
-    <article class="bento-card bento-wide" role="listitem">
-      <div class="bento-wide__left">
-        <p class="bento-label">{{ cases[3].tag }}</p>
-        <h3 class="bento-title bento-title--md">{{ cases[3].title }}</h3>
-      </div>
-      <div class="bento-stat bento-stat--end"
-           [attr.aria-label]="cases[3].metric + ' ' + cases[3].metricLabel">
-        <span class="bento-stat__value bento-stat__value--xl" aria-hidden="true">
-          {{ cases[3].metric }}
-        </span>
-        <p class="bento-stat__label">{{ cases[3].metricLabel }}</p>
-      </div>
-    </article>
-
-    <!-- Card 5: Detail — col 5–12, row 4 -->
-    <article class="bento-card bento-detail-card" role="listitem">
-      <div class="bento-detail-col">
-        <p class="bento-label">Cliente</p>
-        <p class="bento-title bento-title--sm">{{ cases[4].client }}</p>
-      </div>
-      <div class="bento-detail-col">
-        <p class="bento-label">Resultado Cuantificable</p>
-        <p class="bento-stat__value bento-stat__value--md">
-          {{ cases[4].metric }}&nbsp;{{ cases[4].metricLabel }}
-        </p>
-      </div>
-      <div class="bento-detail-col bento-detail-col--end">
-        <button class="bento-cta" type="button"
-                [attr.aria-label]="'Ver caso completo: ' + cases[4].client">
-          Ver Caso Completo
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-               xmlns="http://www.w3.org/2000/svg"
-               aria-hidden="true" focusable="false">
-            <path d="M3 8H13M13 8L9 4M13 8L9 12"
-                  stroke="currentColor" stroke-width="1.5"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+    <!-- Card 4 Combined: Wide Tall — col 5–12, rows 3–4 -->
+    <article class="bento-card bento-hero" role="listitem">
+      <div class="bento-hero__inner">
+        <div class="bento-hero__top">
+          <span class="bento-tag">{{ cases[3].tag }}</span>
+          <h3 class="bento-title bento-title--lg">{{ cases[3].title }}</h3>
+          @if (cases[3].description) {
+            <p class="bento-description">{{ cases[3].description }}</p>
+          }
+        </div>
+        <div class="bento-hero__bottom">
+          <div class="bento-details">
+            <div class="bento-detail">
+              <p class="bento-label">Reto</p>
+              <p class="bento-text">{{ cases[3].challenge }}</p>
+            </div>
+            <div class="bento-detail">
+              <p class="bento-label">Resultado</p>
+              <p class="bento-text">{{ cases[3].result }}</p>
+            </div>
+          </div>
+          <div class="bento-stat bento-stat--end"
+               [attr.aria-label]="cases[3].metric + ' ' + cases[3].metricLabel">
+            <span class="bento-stat__value bento-stat__value--xl" aria-hidden="true">
+              {{ cases[3].metric }}
+            </span>
+            <span class="bento-stat__label">{{ cases[3].metricLabel }}</span>
+          </div>
+        </div>
       </div>
     </article>
 

@@ -105,8 +105,8 @@ import { InViewDirective } from '../../directives/in-view.directive';
   `],
 })
 export class OpiMetricCellComponent {
-  readonly value       = input.required<number>();
-  readonly label       = input.required<string>();
-  readonly suffix      = input<string>('');
+  readonly value = input.required<number>();
+  readonly label = input.required<string>();
+  readonly suffix = input<string>('');
   readonly description = input<string>('');
 }

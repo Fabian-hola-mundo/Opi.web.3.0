@@ -62,7 +62,7 @@ interface SceneConfig {
       overflow: hidden;
       background: #07030e;
       height: 100%;
-      min-height: 320px;
+      min-height: 440px;
       cursor: pointer;
       border: 1px solid rgba(99, 27, 122, 0.22);
       transition:
@@ -126,7 +126,7 @@ interface SceneConfig {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: var(--space-6);
+      padding: 1.5rem; /* 24px */
     }
 
     .card__header {
@@ -154,7 +154,7 @@ interface SceneConfig {
     .card__footer {
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
+      gap: 1.25rem; /* Mayor separación entre título y texto */
     }
 
     .card__title {
@@ -177,12 +177,12 @@ interface SceneConfig {
   `],
 })
 export class OpiCardComponent implements AfterViewInit, OnDestroy {
-  readonly title       = input.required<string>();
-  readonly body        = input<string | undefined>(undefined);
+  readonly title = input.required<string>();
+  readonly body = input<string | undefined>(undefined);
   readonly accentColor = input<string | undefined>(undefined);
-  readonly icon        = input<string | undefined>(undefined);
-  readonly category    = input<string | undefined>(undefined);
-  readonly sceneType   = input<OpiCardScene>('sphere');
+  readonly icon = input<string | undefined>(undefined);
+  readonly category = input<string | undefined>(undefined);
+  readonly sceneType = input<OpiCardScene>('sphere');
 
   @ViewChild('canvas') private canvasRef!: ElementRef<HTMLCanvasElement>;
   private readonly platformId = inject(PLATFORM_ID);
@@ -200,14 +200,14 @@ export class OpiCardComponent implements AfterViewInit, OnDestroy {
 
   private hovered = false;
   private speedCurrent = 1;
-  private speedTarget  = 1;
+  private speedTarget = 1;
 
   /**
    * Time accumulator: advances at `speedCurrent` units per real second.
    * Using this instead of `elapsedTime * speed` prevents phase jumps when
    * speed changes — the sine/cosine phases stay continuous.
    */
-  private timeAccum   = 0;
+  private timeAccum = 0;
   private lastElapsed = 0;
 
   ngAfterViewInit(): void {
@@ -221,50 +221,50 @@ export class OpiCardComponent implements AfterViewInit, OnDestroy {
       case 'torus':
         return {
           geometry: new THREE.TorusGeometry(1.1, 0.44, 24, 80),
-          offset:   new THREE.Vector3(0.35, 0.25, 0),
+          offset: new THREE.Vector3(0.35, 0.25, 0),
           wireColor: 0x1535a8,
-          ptsColor:  0x4d8aff,
-          ptsSize:   0.026,
-          initRot:   { x: Math.PI * 0.35, y: Math.PI * 0.1 },
+          ptsColor: 0x4d8aff,
+          ptsSize: 0.026,
+          initRot: { x: Math.PI * 0.35, y: Math.PI * 0.1 },
         };
       case 'knot':
         return {
           geometry: new THREE.TorusKnotGeometry(0.92, 0.3, 128, 16, 2, 3),
-          offset:   new THREE.Vector3(0.42, 0.3, 0),
+          offset: new THREE.Vector3(0.42, 0.3, 0),
           wireColor: 0x8a1060,
-          ptsColor:  0xe050c5,
-          ptsSize:   0.018,
-          initRot:   { x: 0.3, y: 0.4 },
+          ptsColor: 0xe050c5,
+          ptsSize: 0.018,
+          initRot: { x: 0.3, y: 0.4 },
         };
       default: // sphere
         return {
           geometry: new THREE.SphereGeometry(1.55, 52, 52),
-          offset:   new THREE.Vector3(0.55, 0.42, 0),
+          offset: new THREE.Vector3(0.55, 0.42, 0),
           wireColor: 0x7a22b5,
-          ptsColor:  0xc878ff,
-          ptsSize:   0.022,
-          initRot:   { x: 0, y: 0 },
+          ptsColor: 0xc878ff,
+          ptsSize: 0.022,
+          initRot: { x: 0, y: 0 },
         };
     }
   }
 
   private initScene(): void {
     const canvas = this.canvasRef.nativeElement;
-    const w = canvas.clientWidth  || 320;
+    const w = canvas.clientWidth || 320;
     const h = canvas.clientHeight || 360;
 
     this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.setSize(w, h, false);
 
-    this.scene  = new THREE.Scene();
+    this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(55, w / h, 0.1, 100);
     this.camera.position.set(-0.25, 0.15, 3.6);
 
     this.clock = new THREE.Clock();
 
     const cfg = this.buildSceneConfig(this.sceneType());
-    this.geometry   = cfg.geometry;
+    this.geometry = cfg.geometry;
     this.originalPos = (this.geometry.attributes['position'].array as Float32Array).slice();
 
     // Wireframe layer
@@ -308,7 +308,7 @@ export class OpiCardComponent implements AfterViewInit, OnDestroy {
   }
 
   onHover(active: boolean): void {
-    this.hovered     = active;
+    this.hovered = active;
     this.speedTarget = active ? 1.7 : 1;
   }
 
@@ -317,8 +317,8 @@ export class OpiCardComponent implements AfterViewInit, OnDestroy {
     if (!this.clock || !this.renderer || !this.scene || !this.camera || !this.geometry) return;
 
     // Delta-time: cap at 50 ms to avoid jumps after tab backgrounding
-    const elapsed   = this.clock.getElapsedTime();
-    const delta     = Math.min(elapsed - this.lastElapsed, 0.05);
+    const elapsed = this.clock.getElapsedTime();
+    const delta = Math.min(elapsed - this.lastElapsed, 0.05);
     this.lastElapsed = elapsed;
 
     // Lazy lerp toward target speed (0.025 ≈ very gentle ease)
@@ -329,18 +329,18 @@ export class OpiCardComponent implements AfterViewInit, OnDestroy {
     const t = this.timeAccum;
 
     // Vertex morphing — wave displacement on original sphere/torus/knot surface
-    const pos  = this.geometry.attributes['position'];
-    const arr  = pos.array as Float32Array;
+    const pos = this.geometry.attributes['position'];
+    const arr = pos.array as Float32Array;
     const orig = this.originalPos!;
 
     for (let i = 0; i < arr.length; i += 3) {
       const ox = orig[i], oy = orig[i + 1], oz = orig[i + 2];
       const wave =
-        Math.sin(ox * 2.2 + t)        * 0.09 +
+        Math.sin(ox * 2.2 + t) * 0.09 +
         Math.cos(oy * 2.8 + t * 0.75) * 0.07 +
-        Math.sin(oz * 1.8 + t * 1.3)  * 0.05;
+        Math.sin(oz * 1.8 + t * 1.3) * 0.05;
       const k = 1 + wave;
-      arr[i]     = ox * k;
+      arr[i] = ox * k;
       arr[i + 1] = oy * k;
       arr[i + 2] = oz * k;
     }
@@ -350,8 +350,8 @@ export class OpiCardComponent implements AfterViewInit, OnDestroy {
     const rs = this.speedCurrent;
     this.wireMesh!.rotation.x += 0.001 * rs;
     this.wireMesh!.rotation.y += 0.003 * rs;
-    this.ptsMesh!.rotation.x   = this.wireMesh!.rotation.x;
-    this.ptsMesh!.rotation.y   = this.wireMesh!.rotation.y;
+    this.ptsMesh!.rotation.x = this.wireMesh!.rotation.x;
+    this.ptsMesh!.rotation.y = this.wireMesh!.rotation.y;
 
     // Opacity lerp — subtle brightening on hover
     const wire = this.wireMesh!.material as THREE.MeshBasicMaterial;
