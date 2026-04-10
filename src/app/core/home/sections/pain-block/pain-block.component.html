@@ -1,9 +1,9 @@
 <opi-section-wrapper sectionId="pain-block" theme="low">
   <h2 class="display-md pain-block__heading">
-    Procesos Opitech
+    {{ heading() }}
   </h2>
   <div class="pain-grid">
-    @for (point of painPoints; track point.title; let i = $index) {
+    @for (point of painPoints(); track point.title; let i = $index) {
       <div appInView class="fade-in-up" [class.stagger-1]="i === 0" [class.stagger-2]="i === 1" [class.stagger-3]="i === 2">
         <opi-card
           [sceneType]="point.sceneType"

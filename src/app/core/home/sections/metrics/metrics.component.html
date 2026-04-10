@@ -1,52 +1,69 @@
 <opi-section-wrapper sectionId="metrics" theme="low">
   <header class="metrics-header">
-    <h2 class="display-md">OPI en números</h2>
-    <p class="metrics-subtitle">
-      Métricas que reflejan el impacto tangible de nuestra forma de trabajar.
-    </p>
+    <h2 class="display-md">{{ i18n().heading }}</h2>
+    <p class="metrics-subtitle">{{ i18n().subtitle }}</p>
   </header>
 
   <!-- Mobile / tablet: all metrics in horizontal scroll track -->
-  <div class="metrics-track metrics-track--mobile" role="list" aria-label="Métricas de OPI Technology">
-    @for (metric of metrics; track metric.label; let i = $index) {
-    <opi-metric-cell [value]="metric.value" [suffix]="metric.suffix" [label]="metric.label"
-      [description]="metric.description" [style.--card-index]="i" role="listitem" />
+  <div class="metrics-track metrics-track--mobile" role="list" [attr.aria-label]="i18n().ariaLabel">
+    @for (metric of metrics(); track metric.label; let i = $index) {
+      <opi-metric-cell
+        [value]="metric.value"
+        [suffix]="metric.suffix"
+        [label]="metric.label"
+        [description]="metric.description"
+        [style.--card-index]="i"
+        role="listitem"
+      />
     }
   </div>
 
   <!-- Desktop: carousel showing exactly 3 metrics at a time -->
   <div class="metrics-carousel">
-    <div class="metrics-track metrics-track--desktop" role="list" aria-label="Métricas de OPI Technology"
-      aria-live="polite">
+    <div
+      class="metrics-track metrics-track--desktop"
+      role="list"
+      [attr.aria-label]="i18n().ariaLabel"
+      aria-live="polite"
+    >
       @for (metric of visibleMetrics(); track metric.label; let i = $index) {
-      <opi-metric-cell [value]="metric.value" [suffix]="metric.suffix" [label]="metric.label"
-        [description]="metric.description" [style.--card-index]="i" role="listitem" />
+        <opi-metric-cell
+          [value]="metric.value"
+          [suffix]="metric.suffix"
+          [label]="metric.label"
+          [description]="metric.description"
+          [style.--card-index]="i"
+          role="listitem"
+        />
       }
     </div>
 
     @if (totalPages() > 1) {
-    <nav class="carousel-nav" aria-label="Navegación del carrusel de métricas">
-      <button class="nav-btn" (click)="prev()" [disabled]="!hasPrev()" aria-label="Ver métricas anteriores">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <path d="M12 5l-5 5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
+      <nav class="carousel-nav" [attr.aria-label]="i18n().carouselAriaLabel">
+        <button class="nav-btn" (click)="prev()" [disabled]="!hasPrev()" [attr.aria-label]="i18n().prevAriaLabel">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M12 5l-5 5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
 
-      <div class="page-dots" role="group" aria-label="Indicadores de página">
-        @for (p of pageIndicators(); track p) {
-        <button class="dot" [class.dot--active]="p === currentPage()" [attr.aria-pressed]="p === currentPage()"
-          [attr.aria-label]="'Página ' + (p + 1) + ' de ' + totalPages()" (click)="currentPage.set(p)"></button>
-        }
-      </div>
+        <div class="page-dots" role="group" [attr.aria-label]="i18n().pageGroupAriaLabel">
+          @for (p of pageIndicators(); track p) {
+            <button
+              class="dot"
+              [class.dot--active]="p === currentPage()"
+              [attr.aria-pressed]="p === currentPage()"
+              [attr.aria-label]="'Página ' + (p + 1) + ' de ' + totalPages()"
+              (click)="currentPage.set(p)"
+            ></button>
+          }
+        </div>
 
-      <button class="nav-btn" (click)="next()" [disabled]="!hasNext()" aria-label="Ver siguientes métricas">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <path d="M8 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
-    </nav>
+        <button class="nav-btn" (click)="next()" [disabled]="!hasNext()" [attr.aria-label]="i18n().nextAriaLabel">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M8 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </nav>
     }
   </div>
 </opi-section-wrapper>

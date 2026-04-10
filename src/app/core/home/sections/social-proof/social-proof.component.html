@@ -1,10 +1,10 @@
-<section class="social-proof" aria-label="Empresas que confían en OPI Technology">
-  <p class="social-proof__tagline">Empresas que confían en OPI Technology</p>
+<section class="social-proof" [attr.aria-label]="lang.translations().socialProof.sectionAriaLabel">
+  <p class="social-proof__tagline">{{ lang.translations().socialProof.tagline }}</p>
   <div
     #carousel
     class="social-proof__track"
     role="list"
-    aria-label="Logos de clientes"
+    [attr.aria-label]="lang.translations().socialProof.logosAriaLabel"
   >
     @for (logo of logos; track logo.src) {
       <div class="social-proof__tile" role="listitem">

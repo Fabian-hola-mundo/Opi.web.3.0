@@ -10,6 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
+import { LanguageService } from '../../../../services/language.service';
 
 interface ClientLogo {
   src: string;
@@ -27,6 +28,7 @@ export class SocialProofComponent implements OnInit, OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly ngZone = inject(NgZone);
 
+  readonly lang = inject(LanguageService);
   readonly carousel = viewChild.required<ElementRef<HTMLDivElement>>('carousel');
 
   readonly logos: ClientLogo[] = [

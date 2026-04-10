@@ -1,15 +1,19 @@
-<section class="hero" aria-label="Hero principal">
+<section class="hero" [attr.aria-label]="lang.translations().hero.sectionAriaLabel">
   <div class="hero__canvas" appHeroParticles></div>
   <div class="hero__content container">
     <h1 class="display-lg hero__headline">
-      Construimos el software que sostiene
-      <span class="text-gradient">el núcleo de tu negocio.</span>
+      {{ lang.translations().hero.headline }}
+      <span class="text-gradient">{{ lang.translations().hero.headlineGradient }}</span>
     </h1>
     <p class="body-lg hero__subtitle">
-      Diseñamos y desarrollamos tecnología que sostiene operaciones reales.
+      {{ lang.translations().hero.subtitle }}
     </p>
     <div class="hero__ctas">
-      <opi-button label="Descubre como aportamos a la industria" variant="primary" href="/servicios" />
+      <opi-button
+        [label]="lang.translations().hero.cta"
+        variant="primary"
+        href="/servicios"
+      />
     </div>
   </div>
 </section>

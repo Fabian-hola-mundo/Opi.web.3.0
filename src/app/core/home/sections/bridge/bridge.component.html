@@ -1,45 +1,42 @@
 <opi-section-wrapper sectionId="bridge" theme="default">
   <header class="bridge-header">
-    <p class="bridge-eyebrow">Portafolio de Impacto</p>
+    <p class="bridge-eyebrow">{{ lang.translations().bridge.eyebrow }}</p>
     <h2 class="bridge-title">
-      Historias de <span class="gradient-text">Éxito</span>
+      {{ lang.translations().bridge.title }} <span class="gradient-text">{{ lang.translations().bridge.titleGradient }}</span>
     </h2>
     <p class="bridge-subtitle">
-      Transformando desafíos complejos en arquitecturas de alto rendimiento.
-      Nuestra metodología aplicada a la ingeniería de software.
+      {{ lang.translations().bridge.subtitle }}
     </p>
   </header>
 
-  <div class="bento-grid" role="list" aria-label="Casos de éxito">
+  <div class="bento-grid" role="list" [attr.aria-label]="lang.translations().bridge.gridAriaLabel">
 
     <!-- Card 1: Hero — col 1–8, rows 1–2 -->
     <article class="bento-card bento-hero" role="listitem">
       <div class="bento-glow" aria-hidden="true"></div>
       <div class="bento-hero__inner">
         <div class="bento-hero__top">
-          <span class="bento-tag">{{ cases[0].tag }}</span>
-          <h3 class="bento-title bento-title--lg">{{ cases[0].title }}</h3>
-          @if (cases[0].description) {
-            <p class="bento-description">{{ cases[0].description }}</p>
-          }
+          <span class="bento-tag">{{ lang.translations().bridge.cases[0].tag }}</span>
+          <h3 class="bento-title bento-title--lg">{{ lang.translations().bridge.cases[0].title }}</h3>
+          <p class="bento-description">{{ lang.translations().bridge.cases[0].description }}</p>
         </div>
         <div class="bento-hero__bottom">
           <div class="bento-details">
             <div class="bento-detail">
-              <p class="bento-label">Reto</p>
-              <p class="bento-text">{{ cases[0].challenge }}</p>
+              <p class="bento-label">{{ lang.translations().bridge.challengeLabel }}</p>
+              <p class="bento-text">{{ lang.translations().bridge.cases[0].challenge }}</p>
             </div>
             <div class="bento-detail">
-              <p class="bento-label">Resultado</p>
-              <p class="bento-text">{{ cases[0].result }}</p>
+              <p class="bento-label">{{ lang.translations().bridge.resultLabel }}</p>
+              <p class="bento-text">{{ lang.translations().bridge.cases[0].result }}</p>
             </div>
           </div>
           <div class="bento-stat bento-stat--end"
-               [attr.aria-label]="cases[0].metric + ' ' + cases[0].metricLabel">
+               [attr.aria-label]="lang.translations().bridge.cases[0].metric + ' ' + lang.translations().bridge.cases[0].metricLabel">
             <span class="bento-stat__value bento-stat__value--hero" aria-hidden="true">
-              {{ cases[0].metric }}
+              {{ lang.translations().bridge.cases[0].metric }}
             </span>
-            <span class="bento-stat__label">{{ cases[0].metricLabel }}</span>
+            <span class="bento-stat__label">{{ lang.translations().bridge.cases[0].metricLabel }}</span>
           </div>
         </div>
       </div>
@@ -48,91 +45,79 @@
     <!-- Card 2: Tall — col 9–12, rows 1–2 -->
     <article class="bento-card bento-tall" role="listitem">
       <div class="bento-tall__body">
-        <span class="bento-tag">{{ cases[1].tag }}</span>
-        <h3 class="bento-title bento-title--md">{{ cases[1].title }}</h3>
-        @if (cases[1].description) {
-          <p class="bento-description">{{ cases[1].description }}</p>
-        }
+        <span class="bento-tag">{{ lang.translations().bridge.cases[1].tag }}</span>
+        <h3 class="bento-title bento-title--md">{{ lang.translations().bridge.cases[1].title }}</h3>
+        <p class="bento-description">{{ lang.translations().bridge.cases[1].description }}</p>
         <div class="bento-details">
           <div class="bento-detail">
-            <p class="bento-label">Reto</p>
-            <p class="bento-text">{{ cases[1].challenge }}</p>
+            <p class="bento-label">{{ lang.translations().bridge.challengeLabel }}</p>
+            <p class="bento-text">{{ lang.translations().bridge.cases[1].challenge }}</p>
           </div>
           <div class="bento-detail">
-            <p class="bento-label">Resultado</p>
-            <p class="bento-text">{{ cases[1].result }}</p>
+            <p class="bento-label">{{ lang.translations().bridge.resultLabel }}</p>
+            <p class="bento-text">{{ lang.translations().bridge.cases[1].result }}</p>
           </div>
         </div>
       </div>
       <div class="bento-tall__footer"
-           [attr.aria-label]="cases[1].metric + ' ' + cases[1].metricLabel">
+           [attr.aria-label]="lang.translations().bridge.cases[1].metric + ' ' + lang.translations().bridge.cases[1].metricLabel">
         <p class="bento-stat__value bento-stat__value--gradient" aria-hidden="true">
-          {{ cases[1].metric }}
+          {{ lang.translations().bridge.cases[1].metric }}
         </p>
-        <p class="bento-stat__label">{{ cases[1].metricLabel }}</p>
+        <p class="bento-stat__label">{{ lang.translations().bridge.cases[1].metricLabel }}</p>
       </div>
     </article>
 
     <!-- Card 3: Visual — col 1–4, rows 3–4 -->
     <article class="bento-card bento-visual" role="listitem">
       <div class="bento-visual__content">
-        <span class="bento-tag bento-tag--accent">{{ cases[2].tag }}</span>
-        <h3 class="bento-title bento-title--md">{{ cases[2].title }}</h3>
-        <p class="bento-description">{{ cases[2].description }}</p>
-        
-        @if (cases[2].challenge || cases[2].result) {
-          <div class="bento-details">
-            @if (cases[2].challenge) {
-              <div class="bento-detail">
-                <p class="bento-label">Reto</p>
-                <p class="bento-text">{{ cases[2].challenge }}</p>
-              </div>
-            }
-            @if (cases[2].result) {
-              <div class="bento-detail">
-                <p class="bento-label">Resultado</p>
-                <p class="bento-text">{{ cases[2].result }}</p>
-              </div>
-            }
+        <span class="bento-tag bento-tag--accent">{{ lang.translations().bridge.cases[2].tag }}</span>
+        <h3 class="bento-title bento-title--md">{{ lang.translations().bridge.cases[2].title }}</h3>
+        <p class="bento-description">{{ lang.translations().bridge.cases[2].description }}</p>
+        <div class="bento-details">
+          <div class="bento-detail">
+            <p class="bento-label">{{ lang.translations().bridge.challengeLabel }}</p>
+            <p class="bento-text">{{ lang.translations().bridge.cases[2].challenge }}</p>
           </div>
-        }
-
-        <div [attr.aria-label]="cases[2].metric + ' ' + cases[2].metricLabel">
+          <div class="bento-detail">
+            <p class="bento-label">{{ lang.translations().bridge.resultLabel }}</p>
+            <p class="bento-text">{{ lang.translations().bridge.cases[2].result }}</p>
+          </div>
+        </div>
+        <div [attr.aria-label]="lang.translations().bridge.cases[2].metric + ' ' + lang.translations().bridge.cases[2].metricLabel">
           <p class="bento-stat__value bento-stat__value--xl" aria-hidden="true">
-            {{ cases[2].metric }}
+            {{ lang.translations().bridge.cases[2].metric }}
           </p>
-          <p class="bento-stat__label">{{ cases[2].metricLabel }}</p>
+          <p class="bento-stat__label">{{ lang.translations().bridge.cases[2].metricLabel }}</p>
         </div>
       </div>
     </article>
 
-    <!-- Card 4 Combined: Wide Tall — col 5–12, rows 3–4 -->
+    <!-- Card 4: Wide Tall — col 5–12, rows 3–4 -->
     <article class="bento-card bento-hero" role="listitem">
       <div class="bento-hero__inner">
         <div class="bento-hero__top">
-          <span class="bento-tag">{{ cases[3].tag }}</span>
-          <h3 class="bento-title bento-title--lg">{{ cases[3].title }}</h3>
-          @if (cases[3].description) {
-            <p class="bento-description">{{ cases[3].description }}</p>
-          }
+          <span class="bento-tag">{{ lang.translations().bridge.cases[3].tag }}</span>
+          <h3 class="bento-title bento-title--lg">{{ lang.translations().bridge.cases[3].title }}</h3>
+          <p class="bento-description">{{ lang.translations().bridge.cases[3].description }}</p>
         </div>
         <div class="bento-hero__bottom">
           <div class="bento-details">
             <div class="bento-detail">
-              <p class="bento-label">Reto</p>
-              <p class="bento-text">{{ cases[3].challenge }}</p>
+              <p class="bento-label">{{ lang.translations().bridge.challengeLabel }}</p>
+              <p class="bento-text">{{ lang.translations().bridge.cases[3].challenge }}</p>
             </div>
             <div class="bento-detail">
-              <p class="bento-label">Resultado</p>
-              <p class="bento-text">{{ cases[3].result }}</p>
+              <p class="bento-label">{{ lang.translations().bridge.resultLabel }}</p>
+              <p class="bento-text">{{ lang.translations().bridge.cases[3].result }}</p>
             </div>
           </div>
           <div class="bento-stat bento-stat--end"
-               [attr.aria-label]="cases[3].metric + ' ' + cases[3].metricLabel">
+               [attr.aria-label]="lang.translations().bridge.cases[3].metric + ' ' + lang.translations().bridge.cases[3].metricLabel">
             <span class="bento-stat__value bento-stat__value--xl" aria-hidden="true">
-              {{ cases[3].metric }}
+              {{ lang.translations().bridge.cases[3].metric }}
             </span>
-            <span class="bento-stat__label">{{ cases[3].metricLabel }}</span>
+            <span class="bento-stat__label">{{ lang.translations().bridge.cases[3].metricLabel }}</span>
           </div>
         </div>
       </div>

@@ -1,25 +1,62 @@
 <header class="main-header" [class.is-visible]="isVisible()">
   <div class="header-container">
-    
-    <!-- Logo Estático -->
-    <a class="header-logo">
-      <div class="header-logo-icon">
+
+    <!-- Logo -->
+    <a class="header-logo" aria-label="OPI Technology">
+      <div class="header-logo-icon" aria-hidden="true">
         <span></span><span></span><span></span><span></span>
       </div>
       <span class="header-logo-text">OPI<span class="header-logo-dot">.</span></span>
     </a>
 
     <!-- Nav Links -->
-    <nav class="header-nav">
-      <a>Soluciones</a>
-      <a>Casos de Éxito</a>
-      <a>Métricas</a>
-      <a>Contacto</a>
+    <nav class="header-nav" aria-label="Navegación principal">
+      <a>{{ lang.translations().header.nav.solutions }}</a>
+      <a>{{ lang.translations().header.nav.cases }}</a>
+      <a>{{ lang.translations().header.nav.metrics }}</a>
+      <a>{{ lang.translations().header.nav.contact }}</a>
     </nav>
 
-    <!-- Call to Acton -->
+    <!-- Actions: CTA + theme + lang -->
     <div class="header-actions">
-      <opi-button label="Agendar Reunión" variant="primary"></opi-button>
+      <opi-button [label]="lang.translations().header.cta" variant="primary" />
+
+      <!-- Theme toggle -->
+      <button
+        type="button"
+        class="icon-btn"
+        (click)="themeService.toggle()"
+        [attr.aria-label]="themeService.theme() === 'dark'
+          ? lang.translations().header.themeToggle.light
+          : lang.translations().header.themeToggle.dark"
+      >
+        @if (themeService.theme() === 'dark') {
+          <!-- Sun icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        } @else {
+          <!-- Moon icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        }
+      </button>
+
+      <!-- Language selector dropdown -->
+      <app-language-selector />
     </div>
 
   </div>

@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(npx ng:*)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d['projects']['Opi.web.3.0']['architect']['build']['options'].get\\('styles',[]\\), indent=2\\)\\)\")",
+      "Bash(npm install:*)"
     ]
   }
 }

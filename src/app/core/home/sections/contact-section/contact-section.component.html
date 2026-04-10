@@ -1,20 +1,18 @@
 <opi-section-wrapper sectionId="contact">
   <header class="contact-header">
-    <h2 class="display-md">Agenda tu sesión técnica</h2>
-    <p class="contact-subtitle">
-      Selecciona un especialista y reserva una consulta estratégica de 30 minutos.
-    </p>
+    <h2 class="display-md">{{ i18n().heading }}</h2>
+    <p class="contact-subtitle">{{ i18n().subtitle }}</p>
   </header>
 
   <div class="booking-widget">
-    
+
     <!-- COLUMN 1: Consultants -->
     <div class="booking-col booking-col--consultants">
-      <h3 class="col-title">1. SELECCIONAR CONSULTOR</h3>
-      
+      <h3 class="col-title">{{ i18n().step1 }}</h3>
+
       <div class="consultants-list">
-        @for (consultant of consultants; track consultant.id) {
-          <button 
+        @for (consultant of consultants(); track consultant.id) {
+          <button
             type="button"
             class="consultant-card"
             [class.active]="selectedConsultantId() === consultant.id"
@@ -36,20 +34,20 @@
 
     <!-- COLUMN 2: Calendar -->
     <div class="booking-col booking-col--calendar">
-      <h3 class="col-title">2. ELEGIR FECHA</h3>
-      
+      <h3 class="col-title">{{ i18n().step2 }}</h3>
+
       <div class="calendar-container">
         <div class="calendar-header">
-          <div class="calendar-month">{{ currentMonth() }}</div>
+          <div class="calendar-month">{{ i18n().currentMonth }}</div>
           <div class="calendar-nav">
-            <button type="button" aria-label="Mes anterior">&lt;</button>
-            <button type="button" aria-label="Mes siguiente">&gt;</button>
+            <button type="button" [attr.aria-label]="i18n().prevMonth">&lt;</button>
+            <button type="button" [attr.aria-label]="i18n().nextMonth">&gt;</button>
           </div>
         </div>
 
         <div class="calendar-grid">
           <div class="weekdays">
-            @for (day of weekDays; track day) {
+            @for (day of i18n().weekDays; track day) {
               <div class="weekday">{{ day }}</div>
             }
           </div>
@@ -75,7 +73,7 @@
 
     <!-- COLUMN 3: Time Selection -->
     <div class="booking-col booking-col--times">
-      <h3 class="col-title">3. SELECCIONAR HORARIO</h3>
+      <h3 class="col-title">{{ i18n().step3 }}</h3>
 
       <div class="times-list">
         @for (time of timeSlots; track time) {
@@ -92,14 +90,17 @@
 
       <div class="booking-footer">
         <div class="booking-info">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
-          30 minutos • GMT+1
+          {{ i18n().duration }}
         </div>
-        
+
         <button type="button" class="confirm-btn" (click)="confirmBooking()">
-          Confirmar Reunión
+          {{ i18n().confirmBtn }}
         </button>
       </div>
     </div>

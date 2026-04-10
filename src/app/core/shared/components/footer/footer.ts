@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { LanguageService } from '../../../../services/language.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,4 +8,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrl: './footer.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Footer {}
+export class Footer {
+  readonly lang = inject(LanguageService);
+}

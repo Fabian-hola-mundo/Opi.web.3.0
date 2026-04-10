@@ -1,0 +1,75 @@
+<div class="ls-wrapper" [class.ls-wrapper--open]="isOpen()">
+
+  <!-- Trigger -->
+  <button
+    type="button"
+    class="ls-trigger"
+    (click)="toggle()"
+    [attr.aria-haspopup]="'listbox'"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-label]="'Idioma actual: ' + activeLang.label + '. Clic para cambiar.'"
+  >
+    <img
+      class="ls-flag"
+      [src]="'/flags/' + activeLang.flagCode + '.svg'"
+      [alt]="activeLang.label + ' flag'"
+      width="20"
+      height="15"
+      aria-hidden="true"
+    />
+    <span class="ls-trigger__label">{{ activeLang.label }}</span>
+    <svg
+      class="ls-trigger__chevron"
+      width="10"
+      height="10"
+      viewBox="0 0 10 10"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <!-- Dropdown -->
+  @if (isOpen()) {
+    <div
+      class="ls-dropdown"
+      role="listbox"
+      aria-label="Seleccionar idioma"
+    >
+      @for (lang of languages; track lang.code) {
+        <button
+          type="button"
+          class="ls-option"
+          role="option"
+          [class.ls-option--active]="lang.code === langService.currentLang()"
+          [attr.aria-selected]="lang.code === langService.currentLang()"
+          (click)="select(lang.code)"
+        >
+          <img
+            class="ls-flag"
+            [src]="'/flags/' + lang.flagCode + '.svg'"
+            [alt]="lang.label + ' flag'"
+            width="22"
+            height="16.5"
+            aria-hidden="true"
+          />
+          <span class="ls-option__label">{{ lang.label }}</span>
+          @if (lang.code === langService.currentLang()) {
+            <svg
+              class="ls-option__check"
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path d="M2.5 7L5.5 10L11.5 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          }
+        </button>
+      }
+    </div>
+  }
+
+</div>
