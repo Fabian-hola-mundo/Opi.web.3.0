@@ -44,3 +44,17 @@
   gap: var(--space-4);
   flex-wrap: wrap;
 }
+
+.hero__logo-wrapper {
+  margin-bottom: var(--space-4);
+}
+
+.hero__logo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+
+  @media (max-width: 768px) {
+    height: 40px;
+  }
+}

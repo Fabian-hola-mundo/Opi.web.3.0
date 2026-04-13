@@ -40,48 +40,14 @@
 .header-logo {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
   text-decoration: none;
   cursor: pointer;
 }
 
-/* OPI generic icon mock */
-.header-logo-icon {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
-  border-radius: var(--radius-sm);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  
-  /* Create the 4 dots logic using pseudo elements and grid or flex is too complex 
-   * Let's just place dots manually */
-  span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #fff;
-    border-radius: 50%;
-    
-    &:nth-child(1) { top: 8px; left: 8px; }
-    &:nth-child(2) { top: 8px; right: 8px; }
-    &:nth-child(3) { bottom: 8px; left: 8px; }
-    &:nth-child(4) { bottom: 8px; right: 8px; }
-  }
-}
-
-.header-logo-text {
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-black, 900);
-  font-size: 1.4rem;
-  letter-spacing: -0.02em;
-  color: var(--color-on-surface);
-}
-
-.header-logo-dot {
-  color: var(--color-secondary);
+.header-logo-image {
+  width: 140px;
+  height: 48px;
+  object-fit: contain;
 }
 
 /* Nav Links */

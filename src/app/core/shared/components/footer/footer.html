@@ -2,9 +2,11 @@
   <div class="footer-container">
     <div class="footer-top">
       <a class="footer-logo" aria-label="OPI Technology">
-        <div class="footer-logo-icon" aria-hidden="true">
-          <span></span><span></span><span></span><span></span>
-        </div>
+        @if (themeService.theme() === 'dark') {
+          <img src="assets/images/logos/OpiLogo_vertical_negativo.svg" alt="OPI Technology" class="footer-logo-image" />
+        } @else {
+          <img src="assets/images/logos/OpiLogo_vertical_positivo.svg" alt="OPI Technology" class="footer-logo-image" />
+        }
       </a>
       <p class="copyright label">Copyright &copy; 2026 OPITECH<br>Designed by Opi Technology SAS</p>
     </div>

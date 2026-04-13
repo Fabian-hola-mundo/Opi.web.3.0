@@ -22,28 +22,10 @@
   text-align: center;
 }
 
-.footer-logo-icon {
-  width: 48px;
+.footer-logo-image {
+  width: auto;
   height: 48px;
-  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  
-  span {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #fff;
-    border-radius: 50%;
-    
-    &:nth-child(1) { top: 12px; left: 12px; }
-    &:nth-child(2) { top: 12px; right: 12px; }
-    &:nth-child(3) { bottom: 12px; left: 12px; }
-    &:nth-child(4) { bottom: 12px; right: 12px; }
-  }
+  object-fit: contain;
 }
 
 .copyright {
